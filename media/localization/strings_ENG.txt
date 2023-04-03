@@ -1,0 +1,4 @@
+Create New Character
+View All Characters
+Go to Town (1-5)
+Exit Game
