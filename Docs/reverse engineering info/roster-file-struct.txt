@@ -1,0 +1,100 @@
+This info describes Might and Magic 1 files structure. It is used for reverse engineering of MM1.
+Author: https://github.com/filasfilas
+
+
+roster.dat file:
+---------------------------------------------------------------------------------
+This is the only save file of MM1.
+File includes information about maximum 18 characters (127 bytes per character).
+Offset for exact character is (CharacterId * 0x7fh)
+The last 18 bytes show if a character with exact id number is in roster file. (01h - the char exists, 00h - does not exist).
+
+Bytes info
+-------------------------------------------------
+0-f	name
+10	sex (1-male, 2-female)
+11	align base (2-normal,)
+12	align current
+13	race (1-human, 2-elf, 3-dwarf, 4-gnome, 5-half-orc)
+14	class (1-knight, 2-paladin, 3-archer, 4-cleric, 5-sorcerer, 6-robber)
+15-16	intellect (base and temporary)
+17-18	might (base and temporary)
+19-1a	personality (base and temporary)
+1b-1c	endurance (base and temporary)
+1d-1e	speed (base and temporary)
+1f-20	accuracy (base and temporary)
+21-22	luck (base and temporary)
+23-24	level (base and temporary)
+25	age
+26
+27
+28-2a	exp
+2b-2e	SP (base and temporary)
+2f-30	spell level (base and temporary)
+31-32	gems
+33-34	base HP
+35-36
+37-38	current HP
+39-3b	gold
+3c-3d	AC (base and temporary)
+3e	food
+3f	conditions flag (see explanation below)
+40-45	equipped items (itemId)
+46-4b	backpack items (itemId)
+4c
+4d
+4e
+4f
+50
+51
+52
+53
+54
+55
+56
+57
+58-59	resistance to magic  (base and temporary)
+5a-5b	resistance to fire (base and temporary)
+5c-5d	resistance to cold (base and temporary)
+5e-5f	resistance to electricity (base and temporary)
+60-61	resistance to acid (base and temporary)
+62-63	resistance to fear (base and temporary)
+64-65	resistance to poison (base and temporary)
+66-67	resistance to sleep (base and temporary)
+68-69	damage
+6a
+6b
+6c	thievery
+6d
+6e
+6f
+70	location town inn??
+71
+72
+73
+74
+75
+76
+77
+78
+79
+7a
+7b
+7c
+7d
+7e	id number in roster file
+
+
+conditions flag
+---------------------------------------------------
+00-good
+ff-eradicated
+11****** -dead
+101***** - stoned
+01****** - uncon
+001***** - paralyzed
+0001**** - poisoned
+00001*** - diseased
+000001** - silenced
+0000001* - blinded
+00000001 - asleep

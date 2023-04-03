@@ -1,0 +1,37 @@
+This info describes Might and Magic 1 dump structure. It is used for reverse engineering of MM1.
+Author: https://github.com/filasfilas
+
+
+party members:
+---------------------------------------------------------------------------------
+Party includes 6 characters.
+0x2395 - 0x239a links to party characters
+
+party location:
+-------------------------------------------------------------------------
+0x3c38 - x coord
+0x3c39 - y coord
+0x3c3d - direction
+???? - maze
+
+
+party protection spells:
+-------------------------------------------------------------------------
+0x3c95	party protection from fear
+0x3c96	party protection cold
+0x3c97	party protection fire
+0x3c98	party protection poison
+0x3c99	party protection acid
+0x3c9a	party protection elect
+0x3c9b	party protection magic
+0x3c9c	party light
+0x3c9d	party leather skin
+0x3c9e	party levitate
+0x3c9f	party walk on water
+0x3ca0	party guard dog
+0x3ca1	party physic protection
+0x3ca2	party bless
+0x3ca3	party invisibility
+0x3ca4	party shield
+0x3ca5	party power shield
+0x3ca6  party cursed

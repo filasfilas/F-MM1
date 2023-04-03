@@ -1,0 +1,81 @@
+This info describes Might and Magic 1 files structure. It is used for reverse engineering of MM1.
+Author: https://github.com/filasfilas
+
+
+MM1 graphic files:
+---------------------------------------------------------------------------------
+1) screen0 ... screen9 - 10 screens used in the game intro
+2) monpix.dta - monster sprites.
+3) wallpix.dta - wall sprites.
+
+General info:
+----------------------------------------------------------------------------------
+MM1 uses 4-color CGA graphic. 
+There are 2 bits per pixel. So, 1 byte has info for 4 pixels in a row.
+Structure of a byte:
+pixels: | 0 | 1 | 2 | 3 |
+bits:   |7 6 5 4 3 2 1 0|
+
+All files compressed with RLE (https://en.wikipedia.org/wiki/Run-length_encoding). 
+Structure of a RLE sequence (3 bytes):
+Byte 1: Symbol '{' - RLE sign.
+Byte 2: quantity of symbols
+Byte 3: a symbol to be repeated 
+
+screen0 ... screen9
+---------------------------------------------------------------------------------
+The simplest graphic files of MM1.
+Byte 0-1 - quantity of following bytes (file size-2).
+Next bytes - graphic bytes (compressed with RLE).
+Sprite size is 320x200 (16 000 bytes). Point (0,0) is upper left corner.
+Sprite structure:
+---------------
+byte-0 | byte-200 | byte-400 |....
+byte-1 | byte-201 |....
+byte-3 |......
+.....
+Every byte is for 4 pixels in a row! Color of a pixel depends on chosen color pallete.
+
+
+monpix.dta 
+---------------------------------------------------------------------------------
+The file includes 76 sprites (107x96 pixels). (Some monsters have the same sprite)
+Byte 0-1 file header size (0x0130).
+Bytes 0x2-0x0131 - file header. It is offset table (76 offsets). 4 bytes per offset.
+Next Bytes - 76 sprites (compressed with RLE). A sprite structure is similar to "screen" files.
+
+To get a monster sprite you need monster spriteId (0-75). Then follow the procedure:
+1) get sprite offset: (4*spriteId + 2)
+2) get next sprite offset: (4*(spriteId+1) + 2)
+3) read data between offsets
+4) decompress (RLE)
+
+
+wallpix.dta 
+---------------------------------------------------------------------------------
+The file includes sprites for 18 differen wall types (12 sprites per type: 4 left, 4 right, 4 middle).
+Byte 0-1 file header size (0x0048).
+Bytes 0x2-0x0049 - file header. It is offset table (18 offsets). 4 bytes per offset.
+Next Bytes - 18x12 sprites (compressed with RLE). A sprite structure is similar to "screen" files.
+
+To get a wall sprite you need wall spriteId (0-17) 
+and wall Type (left1, left2, left3, left4, right1, right2, right3, right4, mid1, mid2, mid3, mid4). 
+Then follow the procedure:
+1) get wall offset: (4*spriteId + 2)
+2) get next wall offset: (4*(spriteId+1) + 2)
+3) read data between offsets
+4) decompress (RLE)
+5) get the exact sprite base on the table below:
+type    size       offsets (inside wall struct)
+left1  (32x128)       0
+left2  (40x96)     1025
+left3  (24x64)     1985
+left4  (16x32)     2369
+right1 (32x128)    2551
+right2 (40x96)     3575
+right3 (24x64)     4535
+right4 (16x32)     4919
+mid1   (176x96)    5101
+mid2   (96x64)     9325
+mid3   (48x32)    10861
+mid4   (16x16)    11245
