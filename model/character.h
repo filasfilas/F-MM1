@@ -88,7 +88,7 @@ public:
 	int _gold;
 	int _gems;
 	int _food;
-	int _town;
+	int _town; //0x00 if member of party
 	//int _rosterId;
 	std::vector<int> _equipped;
 	std::vector<int> _backpack;
@@ -119,7 +119,8 @@ public:
 	//gold, food, gems functions
 	int getStock (std::string stockType) const; //stockType:  food, gold, gems
 	void addStock(std::string stockType, int value);
-	int giveStock (std::string stockType) const; 
+	int giveStock (std::string stockType, int value); 
+	int giveStock (std::string stockType); 
 
 private:
 	//modifier for attribute depends on conditions

@@ -40,7 +40,6 @@ void MazeRenderer::render (float xPos, float yPos, int angle){
 	sf::RectangleShape line, viewline;
 	//sf::CircleShape dot;
 
-
 	for (int scan=-400; scan<=400; scan++){
 		float ray = 0.075*scan;
 		float xx, yy, dist, Ax, Ay, len;
@@ -86,9 +85,9 @@ void MazeRenderer::render (float xPos, float yPos, int angle){
 				_crossPoints.erase(_crossPoints.begin()+0);
 			}
 			else {
-                wallSpriteId = get2Bits(_walls[16*yy+xx], dott._dir); //take wall sprite id
-                if ((dott._dir ==N) || (dott._dir ==S)) {wallSpriteShift = dott._xPos - int(dott._xPos);}
-                else  {wallSpriteShift = dott._yPos - int(dott._yPos);}
+                		wallSpriteId = get2Bits(_walls[16*yy+xx], dott._dir); //take wall sprite id
+                		if ((dott._dir ==N) || (dott._dir ==S)) {wallSpriteShift = dott._xPos - int(dott._xPos);}
+                		else  {wallSpriteShift = dott._yPos - int(dott._yPos);}
 				_crossPoints.erase(_crossPoints.begin()+1, _crossPoints.end());
 			}
 		}
@@ -101,6 +100,7 @@ void MazeRenderer::render (float xPos, float yPos, int angle){
         _sprite.setPosition(400-scan, 300-len/2);  
         _sprite.setScale (sf::Vector2f(1.0, len/96));
         _window->draw(_sprite);
+
 	}
 
 }

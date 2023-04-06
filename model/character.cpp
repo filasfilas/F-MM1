@@ -9,6 +9,32 @@ Character::Character() {
 	clear();
 }
 
+int Character::getStock (std::string stockType) const{
+	if(stockType == "food") return _food;
+	if(stockType == "gold") return _gold;
+	if(stockType == "gems") return _gems;
+	return 0;
+}
+
+void Character::addStock(std::string stockType, int value){
+	if(stockType == "food") _food += value;
+	if(stockType == "gold") _gold += value;
+	if(stockType == "gems") _gems += value;
+}
+
+int Character::giveStock (std::string stockType) {
+	return giveStock (stockType, getStock (stockType) );
+}
+
+int Character::giveStock (std::string stockType, int value) {
+	if( value> getStock (stockType)) value = getStock (stockType);
+
+	if(stockType == "food") {_food -= value; return value;}
+	if(stockType == "gold") {_gold -= value; return value;}
+	if(stockType == "gems") {_gems -= value; return value;}
+	return 0;
+}
+
 void Character::clear() {
 	_name="";
 
@@ -55,6 +81,5 @@ void Character::clear() {
 
 	_equipped.clear();
 	_backpack.clear();
-
 }
 

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "roster.h"
+#include "party.h"
 
 class GameModel
 {
 	public:
 		GameModel();
 
-		Roster  _roster;
+		Party  _party;
 
 	private:
 		
