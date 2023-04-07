@@ -8,6 +8,8 @@
 #include "MultiLangManager.h"
 #include "MusicPlayer.h"
 
+#include "../model/GameModel.h"
+
 struct GlobalAppData
 {
     sf::RenderWindow    mWindow;
@@ -16,7 +18,7 @@ struct GlobalAppData
 
 	MultiLangManager	mStringsDB;
 	StateManager		mStates;
-    GameModel           mGameModel;
+    	GameModel           mGameModel;
 };
 
 typedef std::shared_ptr<GlobalAppData> GlobalDataRef;

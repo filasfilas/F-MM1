@@ -1,5 +1,4 @@
 #include "MazeRenderer.h"
-#include <cmath>
 #include <algorithm>
 #include <iostream>
 
@@ -35,18 +34,17 @@ MazeRenderer::MazeRenderer (sf::RenderWindow* target, std::vector<unsigned int> 
 void MazeRenderer::render (float xPos, float yPos, int angle){
 	_xPos=xPos;
 	_yPos=yPos;
-	_angle=angle;
+	_angle=M_PI*angle/180;
 
 	sf::RectangleShape line, viewline;
-	//sf::CircleShape dot;
 
-	for (int scan=-400; scan<=400; scan++){
-		float ray = 0.075*scan;
+	for (int scan=-SCREEN_WIDTH/2; scan<=SCREEN_WIDTH/2; scan++){
+		float ray = scan * VIEW_ANGLE/SCREEN_WIDTH; //in radians
 		float xx, yy, dist, Ax, Ay, len;
 		DIRECTION dir;
 		//parametric line formula
-		Ax = cos (M_PI*(_angle+ray)/180);
-		Ay = sin (M_PI*(_angle+ray)/180);
+		Ax = cos (_angle+ray);
+		Ay = sin (_angle+ray);
 
 		//points of crossing
 		_crossPoints.clear();
@@ -54,7 +52,7 @@ void MazeRenderer::render (float xPos, float yPos, int angle){
 			//hor grid
 			yy=i;
 			dist = (yy-_yPos)/Ay;
-			if (dist >=0) {
+			if ((dist >0)&& (dist <23)){
 				xx=_xPos + Ax*dist;
 				if (Ay<0.0) {dir=S;}
 				else {dir=N;}
@@ -63,13 +61,14 @@ void MazeRenderer::render (float xPos, float yPos, int angle){
 			//ver grid
 			xx=i;
 			dist = (xx-_xPos)/Ax;
-			if (dist >=0) {
+			if ((dist >0)&& (dist <23)) {
 				yy=_yPos + Ay*dist;
 				if (Ax<0.0) {dir=W;}
 				else {dir=E;}
 				_crossPoints.push_back(CrossPoint (xx, yy, dist, dir));
 			}
 		}
+
 		sort (_crossPoints.begin(), _crossPoints.end(), [](const CrossPoint& a, const CrossPoint& b) {return (a._dist < b._dist);});
 
 		//find 1st touch
@@ -85,22 +84,21 @@ void MazeRenderer::render (float xPos, float yPos, int angle){
 				_crossPoints.erase(_crossPoints.begin()+0);
 			}
 			else {
-                		wallSpriteId = get2Bits(_walls[16*yy+xx], dott._dir); //take wall sprite id
-                		if ((dott._dir ==N) || (dott._dir ==S)) {wallSpriteShift = dott._xPos - int(dott._xPos);}
-                		else  {wallSpriteShift = dott._yPos - int(dott._yPos);}
+                wallSpriteId = get2Bits(_walls[16*yy+xx], dott._dir); //take wall sprite id
+                if ((dott._dir ==N) || (dott._dir ==S)) {wallSpriteShift = dott._xPos - int(dott._xPos);}
+                else  {wallSpriteShift = dott._yPos - int(dott._yPos);}
 				_crossPoints.erase(_crossPoints.begin()+1, _crossPoints.end());
 			}
 		}
-		
 
-	//draw 3d sprite wall
-	len = 350/(_crossPoints[0]._dist * cos (M_PI*ray/180));
+
+	    //draw 3d sprite wall
+	    len = 350/(_crossPoints[0]._dist * cos (ray));
         _sprite.setTexture(_textures[wallSpriteId-1]);
         _sprite.setTextureRect(sf::IntRect(int(wallSpriteShift*196), 0, 1, 96));
-        _sprite.setPosition(400-scan, 300-len/2);  
+        _sprite.setPosition(SCREEN_WIDTH/2-scan, SCREEN_HEIGHT/2-len/2);  
         _sprite.setScale (sf::Vector2f(1.0, len/96));
         _window->draw(_sprite);
-
 	}
 
 }

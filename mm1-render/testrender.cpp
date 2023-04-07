@@ -6,8 +6,6 @@
 #include "MazeRenderer.h"
 
 
-int SCREEN_WIDTH = 800;
-int SCREEN_HEIGHT = 600;
 int FramesPerSecond = 60; //частота обновления
 int ANGLE_STEP = 3;
 float MOVE_STEP = 0.05;

@@ -2,20 +2,12 @@
 #include "SFML/Graphics.hpp"
 #include <vector>
 #include <string>
+#include <cmath>
 
 enum DIRECTION {N = 0xC0, E = 0x30, S = 0xC, W = 0x3};
-
-/*
-class Wall
-{
-	public:
-		Wall (sf::Vector2i p1, sf::Vector2i p2);
-		Wall (unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
-		sf::Vector2i _p1, _p2; //points of a wall
-		//Direction of sprite
-};
-*/
-
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+const float VIEW_ANGLE = 60*(M_PI/180); //in radians
 class CrossPoint {
 	public:
 		float _xPos, _yPos, _dist;
@@ -31,7 +23,8 @@ class MazeRenderer
 
 	private:	
 		float _xPos, _yPos, wallSpriteShift;
-		int _angle, wallSpriteId;
+        float _angle; //in radians
+		int wallSpriteId;
 		sf::RenderWindow* _window;
 		std::vector <unsigned int> _walls;
 		std::vector <CrossPoint> _crossPoints;
@@ -40,6 +33,6 @@ class MazeRenderer
 
 		int get2Bits(int value, DIRECTION direction);
 		//sf::Color getWallColor(int m1);
-        	sf::Texture _textures[3];
-        	sf::Sprite _sprite;
+        sf::Texture _textures[3];
+        sf::Sprite _sprite;
 };
