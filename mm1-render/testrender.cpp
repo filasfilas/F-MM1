@@ -57,7 +57,8 @@ void turn (int turnDir){
 		if (_direction == S) {_nextDirection = W;}
 		if (_direction == W) {_nextDirection = N;}
 	}
-	targetAngle = angleRend + 90*turnDirection;
+	//targetAngle = angleRend + 90*turnDirection;
+	_movingCounter = int(90/ANGLE_STEP);
 }
 
 void move (int deltaMove){
@@ -69,7 +70,7 @@ void move (int deltaMove){
 	if (_direction == N) {targetY += deltaMove;}
 	if (_direction == W) {targetX -= deltaMove;}
 	if (_direction == S) {targetY -= deltaMove;}
-	_movingCounter = 20;//int(1/MOVE_STEP);
+	_movingCounter = int(1/MOVE_STEP);
 }
 
 
@@ -118,7 +119,8 @@ int main() {
 			}
 			if (_isTurning){
 				angleRend += turnDirection*ANGLE_STEP;
-				if (angleRend == targetAngle) {
+				_movingCounter--;
+				if (_movingCounter<=0) {
 					_isTurning = false; 
 					_direction = _nextDirection;
 					if (_direction==E) angleRend =0;
