@@ -35,5 +35,6 @@ namespace Sounds {
 namespace Music {
 	enum ID	{
 		MainTheme,
+		TownTheme,
 	};
 }

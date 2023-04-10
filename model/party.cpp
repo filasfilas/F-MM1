@@ -2,6 +2,11 @@
 #include <iostream>
 
 Party::Party(){
+
+//temporary party autoload
+	for (int i; i<6; i++){
+		addCharacter(_roster.getCharacter(i));
+	}
 }
 
 bool Party::addCharacter(Character* newChar){

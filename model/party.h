@@ -1,5 +1,6 @@
 #pragma once
 #include "character.h"
+#include "roster.h"
 #include <vector>
 
 enum PARTY_PROTECTIONS{
@@ -29,4 +30,5 @@ class Party
 		std::vector<Character*> _party;
 		const int PARTY_SIZE = 6;
 		int	_protections[PARTY_PROTECTION_COUNT];
+		Roster	_roster;
 };

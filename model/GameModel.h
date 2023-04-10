@@ -2,6 +2,7 @@
 
 #include "party.h"
 #include "maps/map.h"
+#include "ModelDefinitions.h"
 
 class GameModel
 {
@@ -9,9 +10,16 @@ class GameModel
 		GameModel();
 
 		Party	_party;
-		Map		_map;
+		Map	_map;
 
-	private:
-		
-		
+
+		int _posX;
+		int _posY;
+		int _mapId;
+		DIRECTION _direction;
+
+		void setPosition(int X, int Y);
+		void setDirection(DIRECTION dir);
+		bool canMove(int newX, int newY);
+	private:		
 };

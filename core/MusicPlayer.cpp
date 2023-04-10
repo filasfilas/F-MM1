@@ -7,6 +7,7 @@ MusicPlayer::MusicPlayer()
 , _mVolume (100.f)
 {
     _mFiles[Music::MainTheme] = "media/music/MM1-main.ogg";
+    _mFiles[Music::TownTheme] = "media/music/MM1-town.ogg";
 }
 
 

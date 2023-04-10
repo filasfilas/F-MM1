@@ -9,8 +9,10 @@ file(GLOB SRC_FILES
     	*.cpp
 	core/*.cpp
    	gui/*.cpp
-	model/*.cpp
+   	render/*.cpp
 	states/*.cpp
+	model/*.cpp
+	model/maps/*.cpp
 	)
 
 find_package(SFML 2.5 COMPONENTS system window graphics audio REQUIRED)

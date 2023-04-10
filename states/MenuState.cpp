@@ -1,5 +1,5 @@
 #include "MenuState.h"
-//#include "GameState.h"
+#include "GameState.h"
 #include "../gui/Utility.h"
 //#include <iostream>
 
@@ -55,16 +55,16 @@ void MenuState::handleInput(const sf::Event& event)
 		gData -> mStates.removeState();
 	}
 /*
+	if (newCharBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
+		gData -> mStates.addState(StatePtr (new CreateCharState(gData)));
+	}
+	if (viewAllBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
+		gData -> mStates.addState(StatePtr (new ViewAllState(gData)));
+	}
+*/
 	if (playBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
 		gData -> mStates.replaceState(StatePtr (new GameState(gData)));
 	}
-	if (newCharBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
-		gData -> mStates.addState(StatePtr (new InstructionState(gData)));
-	}
-	if (viewAllBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
-		gData -> mStates.addState(StatePtr (new InstructionState(gData)));
-	}
-*/
 }
 
 void MenuState::update (float dt)
@@ -75,7 +75,7 @@ void MenuState::draw(float dt) {
 
 	playBtn.draw(gData -> mWindow);
 	newCharBtn.draw(gData -> mWindow);
-    viewAllBtn.draw(gData -> mWindow);
+    	viewAllBtn.draw(gData -> mWindow);
 	exitBtn.draw(gData -> mWindow);
 }
 

@@ -4,7 +4,7 @@
 #include <locale>
 
 MultiLangManager::MultiLangManager(){
-	std::locale::global( std::locale( "ru_RU.UTF8" ) );
+	//std::locale::global( std::locale( "ru_RU.UTF8" ) );
 }
 
 void MultiLangManager::loadLangFile (std::string filename){
@@ -25,7 +25,7 @@ sf::String MultiLangManager::getString (StringID name) const{
 
 void MultiLangManager::setLanguage(){
 	std::string language = "ENG";
-	language = "RUS";
+	language = "ENG";
 /*
 	int number;
 	while(true)	{

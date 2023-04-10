@@ -1,6 +1,6 @@
-#include "MazeRenderer.h"
+#include "MazeRender.h"
 #include <algorithm>
-#include <iostream>
+//#include <iostream>
 
 
 CrossPoint::CrossPoint (float xPos, float yPos, float dist, DIRECTION dir)
@@ -10,7 +10,7 @@ CrossPoint::CrossPoint (float xPos, float yPos, float dist, DIRECTION dir)
 , _dir(dir)
 {}
 
-int MazeRenderer::get2Bits(int value, DIRECTION direction) {
+int MazeRender::get2Bits(int value, DIRECTION direction) {
 	int res=value;
 	if (direction==N) res=res>>6;
 	if (direction==S) res=res>>2;
@@ -21,25 +21,28 @@ int MazeRenderer::get2Bits(int value, DIRECTION direction) {
 	return res;
 }
 
-MazeRenderer::MazeRenderer (sf::RenderWindow* target, std::vector<unsigned int> maze){
-	_window = target;
-	_walls = maze;
-    _textures[0].loadFromFile("textures/wall01.png"); 
-    _textures[1].loadFromFile("textures/wall02.png"); 
-    _textures[2].loadFromFile("textures/wall03.png"); 
+MazeRender::MazeRender (sf::RenderWindow* target, int viewWidth, int viewHeight)
+:_window (target)
+,_viewWidth(viewWidth)
+,_viewHeight(viewHeight)
+{}
 
+void MazeRender::chooseMaze (std::vector<unsigned int> maze){
+	_walls = maze;
+    _textures[0].loadFromFile("media/images/walls/wall01.png"); 
+    _textures[1].loadFromFile("media/images/walls/wall02.png"); 
+    _textures[2].loadFromFile("media/images/walls/wall03.png"); 
 }
 
-
-void MazeRenderer::render (float xPos, float yPos, int angle){
+void MazeRender::render (float xPos, float yPos, int angle){
 	_xPos=xPos;
 	_yPos=yPos;
 	_angle=M_PI*angle/180;
 
 	sf::RectangleShape line, viewline;
 
-	for (int scan=-SCREEN_WIDTH/2; scan<=SCREEN_WIDTH/2; scan++){
-		float ray = scan * VIEW_ANGLE/SCREEN_WIDTH; //in radians
+	for (int scan=-_viewWidth/2; scan<=_viewWidth/2; scan++){
+		float ray = scan * VIEW_ANGLE/_viewWidth; //in radians
 		float xx, yy, dist, Ax, Ay, len;
 		DIRECTION dir;
 		//parametric line formula
@@ -96,7 +99,7 @@ void MazeRenderer::render (float xPos, float yPos, int angle){
 	    len = 350/(_crossPoints[0]._dist * cos (ray));
         _sprite.setTexture(_textures[wallSpriteId-1]);
         _sprite.setTextureRect(sf::IntRect(int(wallSpriteShift*196), 0, 1, 96));
-        _sprite.setPosition(SCREEN_WIDTH/2-scan, SCREEN_HEIGHT/2-len/2);  
+        _sprite.setPosition(_viewWidth/2-scan, _viewHeight/2-len/2);  
         _sprite.setScale (sf::Vector2f(1.0, len/96));
         _window->draw(_sprite);
 	}
