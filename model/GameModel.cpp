@@ -1,4 +1,5 @@
 #include "GameModel.h"
+#include <iostream>
 
 GameModel::GameModel() 
 : _party()
@@ -20,16 +21,23 @@ void GameModel::setDirection(DIRECTION dir){
 	_direction = dir;
 }
 
-bool GameModel::canMove (int newX, int newY){
+bool GameModel::canMove (int forward_backward){
 	//temp just for town
-	if ((newX <0)||(newX>15)) return false;
-	if ((newY <0)||(newY>15)) return false;
-	return true;
-/*
-	if ((dir == S)&&(currentY==0)) return false;
-	if ((dir == E)&&(currentX==15)) return false;
-	if ((dir == W)&&(currentX==0)) return false;
+	if (forward_backward == 1){
+		if ((_direction == N)&&(_posY==15)) return false;
+		if ((_direction == S)&&(_posY==0)) return false;
+		if ((_direction == E)&&(_posX==15)) return false;
+		if ((_direction == W)&&(_posX==0)) return false;
+	}
+	if (forward_backward == -1){
+		if ((_direction == S)&&(_posY==15)) return false;
+		if ((_direction == N)&&(_posY==0)) return false;
+		if ((_direction == W)&&(_posX==15)) return false;
+		if ((_direction == E)&&(_posX==0)) return false;
+	}
 
-	return !((_passage[16*currentY+currentX]) && dir);
-*/
+//std::cout<<_map.getPassage(_posX, _posY)<<"  "<< _direction<<"   "<<std::endl;
+	//if ((_map.getPassage(_posX, _posY) & _direction) != 0) return false;
+
+	return true;
 }

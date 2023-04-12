@@ -85,7 +85,7 @@ void GameState::turn (int turnDir){
 
 void GameState::move (int deltaMove){
 	if ((_isMoving)||(_isTurning)) return;
-	//if ( !(gData -> mGameModel.canMove()) return;
+	if ( !(gData -> mGameModel.canMove(deltaMove))) return;
 
 	_targetX = gData -> mGameModel._posX;
 	_targetY = gData -> mGameModel._posY;

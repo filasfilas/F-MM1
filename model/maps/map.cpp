@@ -34,3 +34,6 @@ std::vector<unsigned int> Map::getWalls() const{
 	return _walls;
 }
 
+unsigned int  Map::getPassage(int posX, int posY) {
+	return _passage[16*posY+posX];
+}

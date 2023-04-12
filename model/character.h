@@ -49,10 +49,10 @@ class Character
 {
 public:
 	std::string	_name;
-	Sex	_sex;
+	Sex		_sex;
 	Alignment	_alignment;
 	Alignment	_startAlignment;
-	Race	    _race;
+	Race	    	_race;
 	CharacterClass	_class;
 
 	AttributePair _might;

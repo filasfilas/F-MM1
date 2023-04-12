@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <queue>
 
 #include "party.h"
 #include "maps/map.h"
@@ -20,6 +22,8 @@ class GameModel
 
 		void setPosition(int X, int Y);
 		void setDirection(DIRECTION dir);
-		bool canMove(int newX, int newY);
-	private:		
+		bool canMove(int forward_backward);
+
+	private:	
+
 };
