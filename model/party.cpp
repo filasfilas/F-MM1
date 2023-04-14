@@ -52,3 +52,7 @@ int Party::gatherAll(std::string stockType){
 	}
 	return result;
 }
+
+void Party::save(){
+	_roster.saveRosterFile();
+}

@@ -79,8 +79,9 @@ public:
 	AttributePair _spellLevel;
 
 	int _damage;
+	int _damageMissile;
 	int _skills[16];
-	int _conditions[10];
+	int _condition;
 	bool _spells[100]; //if have the exact spells (spellLvl*10+spellId)
 	AttributePair _HP;
 	AttributePair _SP;
@@ -92,6 +93,8 @@ public:
 	//int _rosterId;
 	std::vector<int> _equipped;
 	std::vector<int> _backpack;
+	std::vector<int> _equipped_charges;
+	std::vector<int> _backpack_charges;	
 
 //methods
 	Character();

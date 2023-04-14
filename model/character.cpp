@@ -70,11 +70,8 @@ void Character::clear() {
 	for (int i=0; i<16; i++) {
 		_skills[i]=0;
 	}
-	_conditions[0]= 1;
+	_condition = 0;
 
-	for (int i=1; i<10; i++) {
-		_conditions[i]=0;
-	}
 	for (int i=0; i<100; i++) {
 		_spells[i]=false;
 	}

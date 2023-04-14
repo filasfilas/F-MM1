@@ -5,7 +5,7 @@
 
 GameState::GameState(GlobalDataRef gData) 
 : gData(gData)
-, _mazeRender(&(gData -> mWindow), SCREEN_WIDTH, SCREEN_HEIGHT)
+, _mazeRender(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().x /1.9)
 {
 	//gData -> mAssets.loadTexture(Textures::MainMenu, "media/images/MM1-map.png");
 	//gData -> mAssets.loadTexture(Textures::MenuButton, "media/images/gui/Button.png");

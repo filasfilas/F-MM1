@@ -91,7 +91,13 @@ void TitleState::stop(){
 	gData -> mAssets.deleteTexture(Textures::Intro8);
 	gData -> mAssets.deleteTexture(Textures::Intro9);
 
-	gData -> mWindow.create (sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), APP_NAME, sf::Style::Close);
+//temporary non full screen
+	int height = sf::VideoMode::getDesktopMode().height -25;
+std::cout<<height<<std::endl;
+	int width = sf::VideoMode::getDesktopMode().width;
+    gData -> mWindow.create (sf::VideoMode(width, height), APP_NAME, sf::Style::Close);
+	gData -> mWindow.setPosition (sf::Vector2i(0,0));
+
 }
 
 void TitleState::nextSlide (){

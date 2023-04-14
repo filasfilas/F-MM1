@@ -27,12 +27,11 @@ Bytes info
 23-24	level (base and temporary)
 25	age
 26
-27
-28-2a	exp
-2b-2e	SP (base and temporary)
+27-2a	exp
+2b-2e	SP (current and base)
 2f-30	spell level (base and temporary)
 31-32	gems
-33-34	base HP
+33-34	current HP
 35-36
 37-38	current HP
 39-3b	gold
@@ -41,18 +40,8 @@ Bytes info
 3f	conditions flag (see explanation below)
 40-45	equipped items (itemId)
 46-4b	backpack items (itemId)
-4c
-4d
-4e
-4f
-50
-51
-52
-53
-54
-55
-56
-57
+4c-51	equipped items charges
+52-57	backpack items charges
 58-59	resistance to magic  (base and temporary)
 5a-5b	resistance to fire (base and temporary)
 5c-5d	resistance to cold (base and temporary)
@@ -62,8 +51,7 @@ Bytes info
 64-65	resistance to poison (base and temporary)
 66-67	resistance to sleep (base and temporary)
 68-69	damage
-6a
-6b
+6a-6b	missile damage
 6c	thievery
 6d
 6e

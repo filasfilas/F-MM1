@@ -11,33 +11,33 @@ There are 195 monsters (32 bytes per monster)
 
 Bytes info
 -------------------------------------------------
-0-f	name
-10	the maximum number of monsters that one group of such monsters can contain.
-11	the monster's friendliness rating, on a scale from 0 to 100.
-12	base HP
-13	AC
-14	max damage
-15	number of melee attacks
-16	speed
-17-18	Experience
+0-e	name
+0f	the maximum number of monsters that one group of such monsters can contain.
+10	the monster's friendliness rating, on a scale from 0 to 100.
+11	base HP
+12	AC
+13	max damage
+14	number of melee attacks
+15	speed
+16-17	Experience
 
-19	loot (gold) level. Bit 0 - a flag if a monster can drop gems
+18	loot (gold) level. Bit 0 - a flag if a monster can drop gems
 	bits:   |7 6 5 4 3 2 1 0|
 		| loot level  |f|
 
-1a	magic resistance and undead flag (bit 7)
+19	magic resistance and undead flag (bit 7)
 	bits:   |7 6 5 4 3 2 1 0|
 		|f| magic resist|
 
-1b	resistance flags (physical attack, fire, electr, cold, energy, paralysis, fear, asleep)
+1a	resistance flags (physical attack, fire, electr, cold, energy, paralysis, fear, asleep)
 	bits:   |7 6 5 4 3 2 1 0|
 		|p|f|e|c|e|p|f|a|
 
-1c	bonus on touch and bonus on touch flag(bit 7)
+1b	bonus on touch and bonus on touch flag(bit 7)
 	bits:   |7 6 5 4 3 2 1 0|
 		|f| bonus value |
 
-1d	if bit-7 (ranged attack flag) is 1
+1c	if bit-7 (ranged attack flag) is 1
 	bits:   |7 6 5 4 3 2 1 0|
 		|1|dmg of ranged|
 
@@ -45,10 +45,10 @@ Bytes info
 	bits:   |7 6 5 4 3 2 1 0|
 		|0|spec attck id|
 
-1e	luck % of special attack
+1d	luck % of special attack
 
-1f	bravery, advance position flag (bit 7), regenerate flag (bit 6)
+1e	bravery, advance position flag (bit 7), regenerate flag (bit 6)
 	bits:   |7 6 5 4 3 2 1 0|
 		|a|r|  bravery  |
 
-20	sprite id (used in monpix.dat)
+1f	sprite id (used in monpix.dat)

@@ -5,7 +5,7 @@
 #include <string>
 #include <cmath>
 
-const float VIEW_ANGLE = 60*(M_PI/180); //in radians
+const float VIEW_ANGLE = 120*(M_PI/180); //in radians
 
 class CrossPoint {
 	public:

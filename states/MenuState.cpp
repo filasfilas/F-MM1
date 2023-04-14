@@ -11,11 +11,13 @@ MenuState::MenuState(GlobalDataRef gData)
 }
 
 void MenuState::init() {
+    int _screen_width = gData -> mWindow.getSize().x;
+    int _screen_height = gData -> mWindow.getSize().y;
 	_background.setTexture(gData -> mAssets.getTexture(Textures::MainMenu));
 	_background.setOrigin(_background.getTextureRect().width/2, _background.getTextureRect().height/2);
-	_background.setPosition(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+	_background.setPosition(_screen_width/2, _screen_height/2);
 	sf::Vector2f scale;
-	scale.y = 1.0*SCREEN_HEIGHT / (_background.getTextureRect().height);
+	scale.y = 1.0*_screen_height/ (_background.getTextureRect().height);
 	scale.x = scale.y;
 	_background.setScale(scale);
 
@@ -30,22 +32,22 @@ void MenuState::init() {
 
 	//create new character
 	text.setString(gData -> mStringsDB.getString(CreateNewCharacter));
-	newCharBtn = Button (sprite, text, sf::Vector2f(SCREEN_WIDTH/2,100));
+	newCharBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,100));
 	newCharBtn.setTextAlign(HorizontalAlign::CENTER);
 
 	//view all character
 	text.setString(gData -> mStringsDB.getString(ViewAllCharacters));
-	viewAllBtn = Button (sprite, text, sf::Vector2f(SCREEN_WIDTH/2,200));
+	viewAllBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,200));
 	viewAllBtn.setTextAlign(HorizontalAlign::CENTER);
 
 	//go to town
 	text.setString(gData -> mStringsDB.getString(GoToTown));
-	playBtn = Button (sprite, text, sf::Vector2f(SCREEN_WIDTH/2,300));
+	playBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,300));
 	playBtn.setTextAlign(HorizontalAlign::CENTER);
 
 	//exit button
 	text.setString(gData -> mStringsDB.getString(ExitGame));
-	exitBtn = Button (sprite, text, sf::Vector2f(SCREEN_WIDTH/2,400));
+	exitBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,400));
 	exitBtn.setTextAlign(HorizontalAlign::CENTER);
 }
 

@@ -6,7 +6,7 @@
 #include "../render/MazeRender.h"
 
 #include "../ResourceIdentifiers.h"
-#include "../Definitions.h"
+//#include "../Definitions.h"
 #include "../gui/Button.h"
 //#include "SFML/Graphics.hpp"
 

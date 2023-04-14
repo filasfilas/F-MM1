@@ -25,6 +25,7 @@ class Party
 
 		void share(std::string stockType);
 		int gatherAll(std::string stockType);
+		void save();
 
 	private:
 		std::vector<Character*> _party;

@@ -22,28 +22,28 @@ Items offsets
 
 Bytes info
 -------------------------------------------------
-0-e	name
+0-d	name
 
-f	class restriction flags (bit 0-5): knight, palladin, archer, cleric, sorcere, robber
+e	class restriction flags (bit 0-5): knight, palladin, archer, cleric, sorcere, robber
 	align restriction flags (bit 6-7): evil, good. If both bits is 1, the item is restricted for neutral. 
 	bits:   |7 6 5 4 3 2 1 0|
 		|e|g|k|p|a|c|s|r|
 
-10	bonus #1 type id  (0xff if cursed)
-11	bonus #1 volume
+f	bonus #1 type id  (0xff if cursed)
+10	bonus #1 volume
 
-12	bonus #2 modificator
+11	bonus #2 modificator
 	no bonus #2 (if bonus #2 modificator == 0xff)
 	bonus #2 type id (if bonus #2 modificator < 0xff)
 
 
-13	charge type id (if bonus #2 modificator == 0xff)
+12	charge type id (if bonus #2 modificator == 0xff)
 	bonus #2 volume (if bonus #2 modificator < 0xff)
 
 
-14	charges quantity (if bonus #2 modificator == 0xff)
+13	charges quantity (if bonus #2 modificator == 0xff)
 	charges quantity of bonus #2 (if bonus #2 modificator < 0xff)
 
-15-16	price
-17	damage
-18	damage bonus or AC
+14-15	price
+16	damage
+17	damage bonus or AC

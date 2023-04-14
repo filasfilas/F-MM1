@@ -96,7 +96,8 @@ void MazeRender::render (float xPos, float yPos, int angle){
 
 
 	    //draw 3d sprite wall
-	    len = 350/(_crossPoints[0]._dist * cos (ray));
+	    
+	    len = 250/(_crossPoints[0]._dist * cos (ray));
         _sprite.setTexture(_textures[wallSpriteId-1]);
         _sprite.setTextureRect(sf::IntRect(int(wallSpriteShift*196), 0, 1, 96));
         _sprite.setPosition(_viewWidth/2-scan, _viewHeight/2-len/2);  

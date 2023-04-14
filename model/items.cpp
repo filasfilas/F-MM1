@@ -1,138 +1,105 @@
-#include "roster.h"
+#include "items.h"
 #include <fstream>
 #include <iostream>
 
-Roster::Roster(){
-    loadRosterFile();
+Items::Items(){
+    loadItemsData();
 }
 
-void Roster::loadRosterFile(){
-    std::ifstream file(rosterFileName, std::ios::in | std::ios::binary);
+void Items::loadItemsData(){
+    std::ifstream file(dataFileName, std::ios::in | std::ios::binary);
     if(!file){
-        std::cerr<<"Cant't open file "<<rosterFileName<< std::endl;
+        std::cerr<<"Cant't open file "<<dataFileName<< std::endl;
     }
     file.read((char*)&memblock, sizeof(memblock));
     file.close();
-
-    for (int i=0; i<18; i++){
-	if (int(memblock[2286 +i]) != 0) {readCharacter(i);}
-    }
 }
 
-void Roster::deleteCharacter(int id){
-	if (id>=_roster.size()) return;
-	Character* delChar = _roster[id];
-	delete (delChar);
-	_roster.erase(_roster.begin()+id);
-}
 
-Character* Roster::getCharacter(int id){
-	if (id>=_roster.size()) return nullptr;
-	return _roster[id];
-}
-
-void Roster::readCharacter(int id){
-	int shift = 127*id;
-	Character* newChar = new Character;
-	//read name
-
-        for(int i=0; i<16; i++){
-	    if(memblock[shift+i] != 0){ 
-		newChar -> _name.push_back(memblock[shift+i]);
-	    }
+std::string Items::getName(int itemId){
+	std::string name;
+	for (int i=0; i<14; i++){
+		name.push_back(memblock[24*(itemId-1) +i]);
 	}
+	return name;
+}
 
-        if(memblock[shift+16] == 1){newChar->_sex = MALE;}
-        if(memblock[shift+16] == 2 ){newChar->_sex = FEMALE;}
+unsigned int Items::getRestriction(int itemId) const{
+	return memblock[24*(itemId-1) +14];
+}
 
-        if(memblock[shift+17]==1) {newChar->_startAlignment = ALIGN_EVIL;}
-        if(memblock[shift+17]==2) {newChar->_startAlignment = ALIGN_NEUTRAL;}
-        if(memblock[shift+17]==3) {newChar->_startAlignment = ALIGN_GOOD;}
+unsigned int Items::getBonus1_id(int itemId) const{
+	return memblock[24*(itemId-1) +15];
+}
 
-        if(memblock[shift+18]==1) {newChar->_alignment = ALIGN_EVIL;}
-        if(memblock[shift+18]==2) {newChar->_alignment = ALIGN_NEUTRAL;}
-        if(memblock[shift+18]==3) {newChar->_alignment = ALIGN_GOOD;}
+unsigned int Items::getBonus1_value(int itemId) const{
+	return memblock[24*(itemId-1) +16];
+}
 
-        if(memblock[shift+19]==1) {newChar->_race = HUMAN;}
-        if(memblock[shift+19]==2) {newChar->_race = ELF;}
-        if(memblock[shift+19]==3) {newChar->_race = DWARF;}
-        if(memblock[shift+19]==4) {newChar->_race = GNOME;}
-        if(memblock[shift+19]==5) {newChar->_race = HALF_ORC;}
+unsigned int Items::getBonus2_id(int itemId) const{
+	return memblock[24*(itemId-1) +17];	
+}
 
-        if(memblock[shift+20]==1) {newChar->_class = CLASS_KNIGHT;}
-        if(memblock[shift+20]==2) {newChar->_class = CLASS_PALADIN;}
-        if(memblock[shift+20]==3) {newChar->_class = CLASS_ARCHER;}
-        if(memblock[shift+20]==4) {newChar->_class = CLASS_CLERIC;}
-        if(memblock[shift+20]==5) {newChar->_class = CLASS_SORCERER;}
-        if(memblock[shift+20]==6) {newChar->_class = CLASS_ROBBER;}
-        if(memblock[shift+20]==7) {newChar->_class = CLASS_NINJA;}	//MM2 only
-        if(memblock[shift+20]==8) {newChar->_class = CLASS_BARBARIAN;}	//MM2 only
 
-        newChar->_intellect._permanent = memblock[shift+21];
-        newChar->_intellect._temporary = memblock[shift+22];
-        newChar->_might._permanent = memblock[shift+23];
-        newChar->_might._temporary = memblock[shift+24];
-        newChar->_personality._permanent = memblock[shift+25];
-        newChar->_personality._temporary = memblock[shift+26];
-        newChar->_endurance._permanent = memblock[shift+27];
-        newChar->_endurance._temporary = memblock[shift+28];
-        newChar->_speed._permanent = memblock[shift+29];
-        newChar->_speed._temporary = memblock[shift+30];
-        newChar->_accuracy._permanent = memblock[shift+31];
-        newChar->_accuracy._temporary = memblock[shift+32];
-        newChar->_luck._permanent = memblock[shift+33];
-        newChar->_luck._temporary = memblock[shift+34];
-        newChar->_level._permanent = memblock[shift+35];
-        newChar->_level._temporary = memblock[shift+36];
-        newChar->_age._permanent = memblock[shift+37];
-//byte 38??
-	newChar->_experience = memblock[shift+39]+256*memblock[shift+40]+256*256*memblock[shift+41]+256*256*256*memblock[shift+42];
-	newChar->_SP._temporary = memblock[shift+43]+256*memblock[shift+44];
-	newChar->_SP._permanent = memblock[shift+45]+256*memblock[shift+46];
-	newChar->_spellLevel._permanent = memblock[shift+47];
-	newChar->_spellLevel._temporary = memblock[shift+48];
-
-	newChar->_gems = memblock[shift+49]+256*memblock[shift+50];
-	newChar->_HP._temporary = memblock[shift+51]+256*memblock[shift+52];
-//bytes 53-54 kind of HP???
-	newChar->_HP._permanent = memblock[shift+55]+256*memblock[shift+56];
-	newChar->_gold = memblock[shift+57]+256*memblock[shift+58]+256*256*memblock[shift+59];
-        newChar->_AC._permanent = memblock[shift+60];
-        newChar->_AC._temporary = memblock[shift+61];
-	newChar->_food = memblock[shift+62];
-	
-// to do newChar->_condition = memblock[shift+63];
-
-	for (int i=0; i<6; i++){
-		if (memblock[shift+64+i] !=0) newChar->_equipped.push_back(memblock[shift+64+i]);
-		if (memblock[shift+70+i] !=0) newChar->_backpack.push_back(memblock[shift+70+i]);
+unsigned int Items::getBonus2_value(int itemId) const{
+	if (getBonus2_id(itemId) != 0xff) {
+		return memblock[24*(itemId-1) +18];
 	}
+	else return 0;
+}
 
-// bytes 76-87 ???
-	newChar->_magicResistence._permanent = memblock[shift+88];
-	newChar->_magicResistence._temporary = memblock[shift+89];
-	newChar->_fireResistence._permanent = memblock[shift+90];
-	newChar->_fireResistence._temporary = memblock[shift+91];
-	newChar->_coldResistence._permanent = memblock[shift+92];
-	newChar->_coldResistence._temporary = memblock[shift+93];
-	newChar->_electricityResistence._permanent = memblock[shift+94];
-	newChar->_electricityResistence._temporary = memblock[shift+95];
-	newChar->_acidResistence._permanent = memblock[shift+96];
-	newChar->_acidResistence._temporary = memblock[shift+97];
-	newChar->_fearResistence._permanent = memblock[shift+98];
-	newChar->_fearResistence._temporary = memblock[shift+99];
-	newChar->_poisonResistence._permanent = memblock[shift+100];
-	newChar->_poisonResistence._temporary = memblock[shift+101];
-	newChar->_sleepResistence._permanent = memblock[shift+102];
-	newChar->_sleepResistence._temporary = memblock[shift+103];
+unsigned int Items::getSpell_id(int itemId) const{
+	if (getBonus2_id(itemId) == 0xff) {
+		return memblock[24*(itemId-1) +18];
+	}
+	else return 0;
+}
 
-	newChar->_damage=memblock[shift+104]+256*memblock[shift+105];	
-//bytes 106-107 damage temp?
-	newChar->_skills[THIEVERY] = memblock[shift+108];
-//bytes 109-111
-//not sure	newChar->_town=memblock[shift+112];
-//bytes 113-125
-//byte 126 is ID in "roster.dta". I see no reason to use it
+unsigned int Items::getMaxCharges(int itemId) const{
+	return memblock[24*(itemId-1) +19];
+}
 
-	_roster.push_back(newChar);
+unsigned int Items::getCost(int itemId) const{
+	return (memblock[24*(itemId-1) +21] + 256* memblock[24*(itemId-1) +20]);
+}
+
+unsigned int Items::getDamage(int itemId) const{
+	return memblock[24*(itemId-1) +22];
+}
+
+unsigned int Items::getBonusDamage(int itemId) const{
+	if ((isWeapon(itemId))||(isMissile(itemId))||(isTwoHanded(itemId))) {
+		return memblock[24*(itemId-1) +23];}
+	else return 0;
+}
+
+unsigned int Items::getAC(int itemId) const{
+	if ((isArmor(itemId))||(isShield(itemId))) {
+		return memblock[24*(itemId-1) +23];}
+	else return 0;
+}
+
+bool Items::isCursed(int itemId) const{
+	return (getBonus1_id(itemId) == 0xff);
+}
+bool Items::isEquippable(int itemId) const{
+	return (getBonus1_id(itemId) != 1);
+}
+bool Items::isWeapon(int itemId) const{
+	return (itemId <= 60);
+}
+bool Items::isMissile(int itemId) const{
+	return ((itemId > 60)&&(itemId <= 85));
+}
+bool Items::isTwoHanded(int itemId) const{
+	return ((itemId > 85)&&(itemId <= 120));
+}
+bool Items::isArmor(int itemId) const{
+	return ((itemId > 120)&&(itemId <= 155));
+}
+bool Items::isShield(int itemId) const{
+	return ((itemId > 155)&&(itemId <= 170));
+}
+bool Items::isMisc(int itemId) const{
+	return (itemId > 170);
 }
