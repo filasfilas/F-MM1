@@ -3,34 +3,29 @@
 #include "../model/ModelDefinitions.h"
 #include <vector>
 #include <string>
-#include <cmath>
 
-const float VIEW_ANGLE = 120*(M_PI/180); //in radians
 
-class CrossPoint {
-	public:
-		float _xPos, _yPos, _dist;
-		DIRECTION _dir;
-		CrossPoint (float xPos, float yPos, float dist, DIRECTION dir);
-};
+//const float VIEW_ANGLE = 90*(M_PI/180); //in radians
+
 
 class MazeRender
 {
 	public:
 		MazeRender(sf::RenderWindow* target, int viewWidth, int viewHeight);
 		void chooseMaze (std::vector<unsigned int> maze);
-		void render(float xPos, float yPos, int angle);
+		void render(float posX, float posY, float dirX, float dirY, float planeX, float planeY);
+        void update(float dt);
 
-	private:	
-		float _xPos, _yPos, wallSpriteShift;
-        	float _angle; //in radians
+	private:
+		const float VIEW_SCALE = 0.4;	
+		float _posX, _posY, _dirX, _dirY, _planeX, _planeY;
+		float wallSpriteShift=0, length, wallDistance;
 		int _viewWidth, _viewHeight;
 		int wallSpriteId;
 		sf::RenderWindow* _window;
 		std::vector <unsigned int> _walls;
-		std::vector <CrossPoint> _crossPoints;
 
 		int get2Bits(int value, DIRECTION direction);
-        	sf::Texture _textures[3];
-        	sf::Sprite _sprite;
+       	sf::Texture _textures[3];
+       	sf::Sprite _sprite;
 };

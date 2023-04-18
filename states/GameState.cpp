@@ -1,12 +1,13 @@
 #include "MenuState.h"
 #include "GameState.h"
 //#include "../gui/Utility.h"
-//#include <iostream>
+#include <iostream>
 
 GameState::GameState(GlobalDataRef gData) 
 : gData(gData)
-, _mazeRender(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().x /1.9)
+, _mazeRender(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().y)
 {
+	
 	//gData -> mAssets.loadTexture(Textures::MainMenu, "media/images/MM1-map.png");
 	//gData -> mAssets.loadTexture(Textures::MenuButton, "media/images/gui/Button.png");
 	
@@ -18,7 +19,7 @@ void GameState::init() {
 	_mazeRender.chooseMaze(gData -> mGameModel._map.getWalls());
 	_xPos = (gData -> mGameModel._posX) +0.5;
 	_yPos = (gData -> mGameModel._posY) +0.5;
-	_angle = dirToAngle(gData -> mGameModel._direction);
+	directionToVector(gData -> mGameModel._direction);
 }
 
 void GameState::handleInput(const sf::Event& event)
@@ -35,7 +36,14 @@ void GameState::handleInput(const sf::Event& event)
 void GameState::update (float dt)
 {
 	if (_isTurning){
-		_angle += _turnDirection*ANGLE_STEP;
+
+      		float oldDirX = _dirX;
+      		_dirX = _dirX * cos(ANGLE_STEP) - _turnDirection*_dirY * sin(ANGLE_STEP);
+      		_dirY = _turnDirection*oldDirX * sin(ANGLE_STEP) + _dirY * cos(ANGLE_STEP);
+      		float oldPlaneX = _planeX;
+      		_planeX = _planeX * cos(ANGLE_STEP) - _turnDirection*_planeY * sin(ANGLE_STEP);
+      		_planeY = _turnDirection*oldPlaneX * sin(ANGLE_STEP) + _planeY * cos(ANGLE_STEP);
+
 		_movingCounter--;
 		if (_movingCounter<=0) {
 			_isTurning = false; 
@@ -56,16 +64,19 @@ void GameState::update (float dt)
 
 	_xPos = (gData -> mGameModel._posX) +0.5;
 	_yPos = (gData -> mGameModel._posY) +0.5;
-	_angle = dirToAngle(gData -> mGameModel._direction);
+	directionToVector(gData -> mGameModel._direction);
+//std::cout<<gData -> mGameModel._posX<<" "<<gData -> mGameModel._posY;
+//std::cout<<" "<<gData -> mGameModel._direction<<std::endl;
 }
 
 void GameState::draw(float dt) {
-	_mazeRender.render(_xPos, _yPos, _angle);
+	//_mazeRender.render(_xPos, _yPos, _angle);
+	_mazeRender.render(_xPos, _yPos, _dirX, _dirY, _planeX, _planeY);
 }
 
 void GameState::turn (int turnDir){
-	_turnDirection = turnDir;
 	if ((_isMoving)||(_isTurning)) return;
+	_turnDirection = turnDir;
 	_isTurning = true;
 	DIRECTION dir = gData -> mGameModel._direction;
 	if (turnDir == 1) {
@@ -80,27 +91,21 @@ void GameState::turn (int turnDir){
 		if (dir == S) {_nextDirection = W;}
 		if (dir == W) {_nextDirection = N;}
 	}
-	_movingCounter = int(90/ANGLE_STEP);
+	_movingCounter = int(90* (M_PI/180)/ANGLE_STEP);
 }
 
 void GameState::move (int deltaMove){
 	if ((_isMoving)||(_isTurning)) return;
-	if ( !(gData -> mGameModel.canMove(deltaMove))) return;
-
-	_targetX = gData -> mGameModel._posX;
-	_targetY = gData -> mGameModel._posY;
-	DIRECTION dir = gData -> mGameModel._direction;
-	if (dir == E) {_targetX += deltaMove;}
-	if (dir == N) {_targetY += deltaMove;}
-	if (dir == W) {_targetX -= deltaMove;}
-	if (dir == S) {_targetY -= deltaMove;}
+	//if ( !(gData -> mGameModel.canMove(deltaMove))) return;
+	_targetX = gData -> mGameModel._posX + _dirX * deltaMove;
+	_targetY = gData -> mGameModel._posY + _dirY * deltaMove;
 	_movingCounter = int(1/MOVE_STEP); 
 	_isMoving = true;
 }
 
-int GameState::dirToAngle(const DIRECTION dir){
-	if (dir==E) return 0;
-	if (dir==N) return 90;
-	if (dir==W) return 180;
-	if (dir==S) return -90;
+void GameState::directionToVector(const DIRECTION dir){
+	if (dir==E) {_dirX = 1; _dirY = 0; _planeX = 0; _planeY = -FOV;};
+	if (dir==N) {_dirX = 0; _dirY = 1; _planeX = FOV; _planeY = 0;};
+	if (dir==W) {_dirX = -1; _dirY = 0; _planeX = 0; _planeY = FOV;};
+	if (dir==S) {_dirX = 0; _dirY = -1; _planeX = -FOV; _planeY = 0;};
 }

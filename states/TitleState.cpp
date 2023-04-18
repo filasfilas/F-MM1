@@ -93,9 +93,12 @@ void TitleState::stop(){
 
 //temporary non full screen
 	int height = sf::VideoMode::getDesktopMode().height -25;
-std::cout<<height<<std::endl;
 	int width = sf::VideoMode::getDesktopMode().width;
-    gData -> mWindow.create (sf::VideoMode(width, height), APP_NAME, sf::Style::Close);
+
+	width = 800;
+	height=600;
+
+    	gData -> mWindow.create (sf::VideoMode(width, height), APP_NAME, sf::Style::Close);
 	gData -> mWindow.setPosition (sf::Vector2i(0,0));
 
 }

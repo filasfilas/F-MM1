@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 #include "../core/State.h"
 #include "../core/Application.h"
@@ -30,19 +31,21 @@ class GameState : public State
 	private:
 		GlobalDataRef	gData;
 		MazeRender _mazeRender;
-		float _xPos, _yPos;	//position for render
+		float _xPos, _yPos, _dirX, _dirY, _planeX, _planeY;	//vectors for render
 		int _angle; 		//angle for render
 		int _targetX, _targetY;
 	
 		void turn (int turnDir);
-		int dirToAngle(const DIRECTION dir);
+		void directionToVector(const DIRECTION dir);
 		void move (int deltaMove);
 		bool _isMoving = false;
 		bool _isTurning = false;
 		int _turnDirection;
 		DIRECTION _nextDirection;
 		int _movingCounter;
-		const int ANGLE_STEP=3;
+		int FOV_ANGLE = 90;	//angle of render view (in degrees)
+		const float FOV = tan (FOV_ANGLE/2 * (M_PI/180)); //vector length for Field of view for maze render
+		const float ANGLE_STEP=3* (M_PI/180);
 		float MOVE_STEP = 0.05;
 
 };
