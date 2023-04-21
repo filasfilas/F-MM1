@@ -2,3 +2,5 @@
 Показать всех персонажей
 Идти в город (1-5)
 Выход из игры
+Press Esc to go back
+Press A-R to view a character

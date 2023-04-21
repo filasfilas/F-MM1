@@ -24,5 +24,6 @@ class ViewAllCharState : public State
 
         	//sf::Sprite  _background;
 
-		//sf::Text	titleText[1];
+		sf::Text	titleText[3];
+		sf::Text	charInfoText[18];
 };

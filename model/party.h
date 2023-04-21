@@ -27,9 +27,10 @@ class Party
 		int gatherAll(std::string stockType);
 		void save();
 
+		Roster	_roster;
+
 	private:
 		std::vector<Character*> _party;
 		const int PARTY_SIZE = 6;
 		int	_protections[PARTY_PROTECTION_COUNT];
-		Roster	_roster;
 };

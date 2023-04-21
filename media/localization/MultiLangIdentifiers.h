@@ -8,6 +8,8 @@ enum StringID
 		ViewAllCharacters,
 		GoToTown,
 		ExitGame,
+		EscToGoBack,
+		PressToViewChar,
 
 		STRING_COUNT
 	};

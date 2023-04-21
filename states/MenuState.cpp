@@ -1,5 +1,6 @@
 #include "MenuState.h"
 #include "GameState.h"
+#include "ViewAllCharState.h"
 #include "../gui/Utility.h"
 //#include <iostream>
 
@@ -26,7 +27,7 @@ void MenuState::init() {
 	sf::Text text;
 
 	sprite.setTexture(gData -> mAssets.getTexture(Textures::MenuButton));
-    sprite.setScale(1.5, 0.8);
+    	sprite.setScale(1.5, 0.8);
 	centerOrigin(sprite);
 	text.setFont(gData-> mAssets.getFont(Fonts::Main));
 
@@ -53,19 +54,20 @@ void MenuState::init() {
 
 void MenuState::handleInput(const sf::Event& event)
 {
-	if (exitBtn.isClicked(sf::Mouse::Left, gData -> mWindow)) {
-		gData -> mStates.removeState();
+	if (viewAllBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
+		gData -> mStates.addState(StatePtr (new ViewAllCharState(gData)));
 	}
 /*
 	if (newCharBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
 		gData -> mStates.addState(StatePtr (new CreateCharState(gData)));
 	}
-	if (viewAllBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
-		gData -> mStates.addState(StatePtr (new ViewAllState(gData)));
-	}
+
 */
 	if (playBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
 		gData -> mStates.replaceState(StatePtr (new GameState(gData)));
+	}
+	if (exitBtn.isClicked(sf::Mouse::Left, gData -> mWindow)) {
+		gData -> mStates.removeState();
 	}
 }
 
