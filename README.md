@@ -14,10 +14,10 @@ Outsourced resources:
 
 ##### What can you see:
 	1) Maze loading and Ray casting (Draft!). You can go across Sorpigal
-![alt text](https://github.com/filasfilas/F-MM1/screenshots/render.png?raw=true)
+![alt text](https://github.com/filasfilas/F-MM1/blob/main/screenshots/render.png?raw=true)
 	2) Skeleton of SFML engine. You can see placeholders of intro and start menu.
 ![alt text](https://github.com/filasfilas/F-MM1/blob/main/screenshots/intro.png?raw=true)
-![alt text](https://github.com/filasfilas/F-MM1/screenshots/main-menu.png?raw=true)
+![alt text](https://github.com/filasfilas/F-MM1/blob/main/screenshots/main-menu.png?raw=true)
 
 ##### Planned features:
     Ray casting rendering allowing smooth movement
