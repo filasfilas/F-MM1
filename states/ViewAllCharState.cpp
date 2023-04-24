@@ -1,4 +1,5 @@
 #include "ViewAllCharState.h"
+#include "CharacterDetailState.h"
 #include "../model/character.h"
 //#include "../gui/Utility.h"
 //#include <iostream>
@@ -39,6 +40,13 @@ void ViewAllCharState::handleInput(const sf::Event& event)
         {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 			gData -> mStates.removeState();
+		}
+		else if ((event.key.code >= sf::Keyboard::A)&&(event.key.code<=sf::Keyboard::Z)) {
+			int num = int (event.key.code);
+			Character* character = gData-> mGameModel._party._roster.getCharacter(num);
+			if (character != nullptr){
+				gData -> mStates.addState(StatePtr (new CharacterDetailState(gData, character)));
+			}
 		}
 	}
 }

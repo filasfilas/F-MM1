@@ -11,6 +11,7 @@ file(GLOB SRC_FILES
    	gui/*.cpp
    	render/*.cpp
 	states/*.cpp
+	states/shops/*.cpp
 	model/*.cpp
 	model/maps/*.cpp
 	)
