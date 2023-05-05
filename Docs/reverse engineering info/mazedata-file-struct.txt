@@ -9,29 +9,32 @@ Every region is 512 bytes of file.
 To find exact region you need regionId.  Offset = regionId * 0x200h. You can find regionId of every region at the end of this file.
 
 Every region is described in 2 blocks of 256 bytes.
-First block - wall sprite information. Second block - passage information.
-
 Every maze is 16x16 cells. Cell (0,0) is bottom left corner. To find the exact cell (X,Y) info you must look for byte 16*Y+X in every 256 bytes block.
+
+
+First block - wall sprite information.
 Every byte describes info of a cell in the following bit to bit order:
 
 Direction | North | East | South | West|
 Bit       | 7  6  | 5 4  | 3  2  | 1 0 |
 
-
-How to understand 2-bits sequences:
+How to understand 2-bits sequences of first block:
 --------------------------------------------------------------
-
-First block (0x000 - 0x0ff):
 00 - no wall, no sprite
 01 - wall sprite 1 (e.g. clean wall)
 10 - wall sprite 2 (door)
 11 - wall sprite 3 (e.g. wall with a torch)
 
-Second block (0x100 - 0x1ff): //passability???
-00 - free passage ???
-01 - 
-10 - 
-11 - 
+
+Second block (0x100 - 0x1ff) - cell info and passability
+Bit 7 - special feature (permanent encounter, teleport, message, etc.)
+Bit 6 - passability to North
+Bit 5 - darkness zone
+Bit 4 - passability to East
+Bit 3 - dangerous to rest here
+Bit 2 - passability to South
+Bit 1 - non-magic zone
+Bit 0 - passability to West
 
 
 

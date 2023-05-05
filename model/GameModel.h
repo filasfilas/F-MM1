@@ -22,7 +22,7 @@ class GameModel
 
 		void setPosition(int X, int Y);
 		void setDirection(DIRECTION dir);
-		bool canMove(int forward_backward);
+		bool canMove(int dirX, int dirY);
 
 	private:	
 

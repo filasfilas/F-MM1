@@ -96,7 +96,7 @@ void GameState::turn (int turnDir){
 
 void GameState::move (int deltaMove){
 	if ((_isMoving)||(_isTurning)) return;
-	//if ( !(gData -> mGameModel.canMove(deltaMove))) return;
+	if ( !(gData -> mGameModel.canMove(int(_dirX * deltaMove), int(_dirY * deltaMove)))) return;
 	_targetX = gData -> mGameModel._posX + _dirX * deltaMove;
 	_targetY = gData -> mGameModel._posY + _dirY * deltaMove;
 	_movingCounter = int(1/MOVE_STEP); 

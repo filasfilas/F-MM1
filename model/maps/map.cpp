@@ -35,5 +35,26 @@ std::vector<unsigned int> Map::getWalls() const{
 }
 
 unsigned int  Map::getPassage(int posX, int posY) {
-	return _passage[16*posY+posX];
+	return (_passage[16*posY+posX] & 0x55);
+}
+
+bool Map::isNonMagic(int posX, int posY) {
+	return (_passage[16*posY+posX] & 0x2) != 0;
+}
+bool Map::isDangerous(int posX, int posY) {
+	return (_passage[16*posY+posX] & 0x8) != 0;
+}
+bool Map::isDarkness(int posX, int posY) {
+	return (_passage[16*posY+posX] & 0x20) != 0;
+}
+bool Map::isSpecial(int posX, int posY) {
+	return (_passage[16*posY+posX] & 0x80) != 0;
+}
+
+void Map::clearSpecial(int posX, int posY) {
+	_passage[16*posY+posX] &= 0x7f;
+}
+
+void Map::reset() {
+	loadMap(_id);
 }
