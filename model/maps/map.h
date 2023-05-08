@@ -1,13 +1,14 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 #include "../ModelDefinitions.h"
 
 class Map
 {
 	public:
 		Map();
-		void loadMap (int id);
+		void select (int id);
 		std::vector<unsigned int> getWalls() const;
 		unsigned int getPassage(int posX, int posY);
 		bool isNonMagic(int posX, int posY);
@@ -21,4 +22,9 @@ class Map
 		std::vector<unsigned int> _walls;	
 		std::vector<unsigned int> _passage;
 
+		std::vector<unsigned int> _regionWalls;
+		unsigned int _constEncounters[16][16];
+		std::function<void()> _scripts[16][16];
+		void loadScripts();
+		int getOffset (int posX, int posY);
 };

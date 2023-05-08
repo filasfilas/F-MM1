@@ -15,28 +15,15 @@ GameModel::GameModel()
 void GameModel::setPosition(int X, int Y){
 	_posX = X;
 	_posY = Y;
+	cellAction();
 }
 
 void GameModel::setDirection(DIRECTION dir){
 	_direction = dir;
+	cellAction();
 }
 
 bool GameModel::canMove (int dirX, int dirY){
-	//temp just for town
-/*
-	if (forward_backward == 1){
-		if ((_direction == N)&&(_posY==15)) return false;
-		if ((_direction == S)&&(_posY==0)) return false;
-		if ((_direction == E)&&(_posX==15)) return false;
-		if ((_direction == W)&&(_posX==0)) return false;
-	}
-	if (forward_backward == -1){
-		if ((_direction == S)&&(_posY==15)) return false;
-		if ((_direction == N)&&(_posY==0)) return false;
-		if ((_direction == W)&&(_posX==15)) return false;
-		if ((_direction == E)&&(_posX==0)) return false;
-	}
-*/
 	DIRECTION dir=NO_DIRECTION;
 	if ((dirX==0)&&(dirY==1)) {dir = N;}
 	if ((dirX==0)&&(dirY==-1)) {dir = S;}
@@ -45,4 +32,9 @@ bool GameModel::canMove (int dirX, int dirY){
 
 	if ((_map.getPassage(_posX, _posY) & dir) == 0) {return true;}
 	else {return false;}
+}
+
+void GameModel::cellAction() {
+	if (!_map.isSpecial(_posX, _posY)) {return;}
+	//std::cout<<"Special!"<<std::endl;
 }

@@ -40,8 +40,9 @@ void Application::processInput(){
 	sf::Event event;
 
 	while (gData -> mWindow.pollEvent(event)) {
- 		if (event.type == sf::Event::Closed)
-		{gData -> mWindow.close();}
+ 		if (event.type == sf::Event::Closed) {
+			gData -> mWindow.close();
+		}
         	//pass event into StateStack
         	gData -> mStates.handleInput(event);
 	}

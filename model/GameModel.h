@@ -25,5 +25,6 @@ class GameModel
 		bool canMove(int dirX, int dirY);
 
 	private:	
+		void cellAction();
 
 };

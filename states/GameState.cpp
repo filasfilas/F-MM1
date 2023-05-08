@@ -15,7 +15,7 @@ GameState::GameState(GlobalDataRef gData)
 }
 
 void GameState::init() {
-	gData -> mGameModel._map.loadMap(0);
+	gData -> mGameModel._map.select(0);
 	_mazeRender.chooseMaze(gData -> mGameModel._map.getWalls());
 	_xPos = (gData -> mGameModel._posX) +0.5;
 	_yPos = (gData -> mGameModel._posY) +0.5;
