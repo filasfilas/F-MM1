@@ -1,9 +1,10 @@
 #include "map.h"
+#include "maze00.h"
 #include <fstream>
 #include <iostream>
 
 Map::Map(){
-	_id =0;
+	//_id =0;
 
 	const char* sourceFileName="MAZEDATA.DTA";
 	unsigned char ch=0;	
@@ -29,10 +30,11 @@ Map::Map(){
 
 void Map::select(int id){
     _id = id;
+std::cout<<_id<<std::endl;
 
 	_regionWalls.clear();
 	for (int i=0; i<256; i++) {
-		_regionWalls.push_back(_walls[512*id + i]);
+		_regionWalls.push_back(_walls[256*id + i]);
 	}
 
 	loadScripts();
@@ -64,7 +66,7 @@ void Map::clearSpecial(int posX, int posY) {
 }
 
 int Map::getOffset(int posX, int posY) {
-	return _id*512+16*posY+posX;
+	return _id*256+16*posY+posX;
 }
 
 //to do
@@ -72,6 +74,7 @@ void Map::loadScripts() {
 	for(int y=0; y<16; y++){
 		for(int x=0; x<16; x++){
 			if (isSpecial(x,y)) {
+
 			} 
 			else {
 				_scripts[x][y] = nullptr;
@@ -79,4 +82,6 @@ void Map::loadScripts() {
 			}
 		}
 	}
+	//_scripts[12][0] = Maze00::_scripts [4];
+
 }

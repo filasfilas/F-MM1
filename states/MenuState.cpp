@@ -64,11 +64,19 @@ void MenuState::handleInput(const sf::Event& event)
 
 */
 	if (playBtn.isClicked(sf::Mouse::Left, gData -> mWindow))	{
-		gData -> mStates.replaceState(StatePtr (new GameState(gData)));
+		gData -> mStates.replaceState(StatePtr (new GameState(gData, 1)));
 	}
 	if (exitBtn.isClicked(sf::Mouse::Left, gData -> mWindow)) {
 		gData -> mStates.removeState();
 	}
+	
+//temporary town selector
+	if (event.type == sf::Event::KeyReleased) {
+		if ((event.key.code >= sf::Keyboard::Num1)&&(event.key.code <= sf::Keyboard::Num5)){
+			gData -> mStates.replaceState(StatePtr(new GameState(gData, (event.key.code-26) )));
+		}
+	}
+
 }
 
 void MenuState::update (float dt)

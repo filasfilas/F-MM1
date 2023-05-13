@@ -17,12 +17,12 @@
 class GameState : public State
 {
 	public:
-		GameState (GlobalDataRef gData);
+		GameState (GlobalDataRef gData, int townId);
 
-        	void init();
-        	void handleInput(const sf::Event& event);
-        	void update (float dt);
-        	void draw(float dt );
+        void init();
+        void handleInput(const sf::Event& event);
+        void update (float dt);
+        void draw(float dt );
         
 		void	stop(){};
 		void	resume(){};
@@ -31,6 +31,7 @@ class GameState : public State
 	private:
 		GlobalDataRef	gData;
 		MazeRender _mazeRender;
+		int	_startTownId;
 		float _xPos, _yPos, _dirX, _dirY, _planeX, _planeY;	//vectors for render
 		int _angle; 		//angle for render
 		int _targetX, _targetY;

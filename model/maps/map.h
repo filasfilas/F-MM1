@@ -17,14 +17,15 @@ class Map
 		bool isSpecial(int posX, int posY);
 		void clearSpecial(int posX, int posY);
 		void reset();
+		std::function<void()> _scripts[16][16];
+
 	private:
 		int _id;
 		std::vector<unsigned int> _walls;	
 		std::vector<unsigned int> _passage;
-
 		std::vector<unsigned int> _regionWalls;
 		unsigned int _constEncounters[16][16];
-		std::function<void()> _scripts[16][16];
+
 		void loadScripts();
 		int getOffset (int posX, int posY);
 };

@@ -3,11 +3,11 @@
 //#include "../gui/Utility.h"
 #include <iostream>
 
-GameState::GameState(GlobalDataRef gData) 
+GameState::GameState(GlobalDataRef gData, int townId) 
 : gData(gData)
 , _mazeRender(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().y)
 {
-	
+	_startTownId = townId-1;	
 	//gData -> mAssets.loadTexture(Textures::MainMenu, "media/images/MM1-map.png");
 	//gData -> mAssets.loadTexture(Textures::MenuButton, "media/images/gui/Button.png");
 	
@@ -15,7 +15,8 @@ GameState::GameState(GlobalDataRef gData)
 }
 
 void GameState::init() {
-	gData -> mGameModel._map.select(0);
+///////////////////
+	gData -> mGameModel.selectMap(_startTownId);
 	_mazeRender.chooseMaze(gData -> mGameModel._map.getWalls());
 	_xPos = (gData -> mGameModel._posX) +0.5;
 	_yPos = (gData -> mGameModel._posY) +0.5;

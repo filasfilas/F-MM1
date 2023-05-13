@@ -18,6 +18,12 @@ void GameModel::setPosition(int X, int Y){
 	cellAction();
 }
 
+void GameModel::selectMap(int id) {
+	if ((id<0)&&(id>54)) return;
+	_mapId = id;
+	_map.select(id);
+}
+
 void GameModel::setDirection(DIRECTION dir){
 	_direction = dir;
 	cellAction();
@@ -36,5 +42,6 @@ bool GameModel::canMove (int dirX, int dirY){
 
 void GameModel::cellAction() {
 	if (!_map.isSpecial(_posX, _posY)) {return;}
+	_map._scripts[_posX][_posY];
 	//std::cout<<"Special!"<<std::endl;
 }

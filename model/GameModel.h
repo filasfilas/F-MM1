@@ -21,6 +21,7 @@ class GameModel
 		DIRECTION _direction;
 
 		void setPosition(int X, int Y);
+		void selectMap(int id);
 		void setDirection(DIRECTION dir);
 		bool canMove(int dirX, int dirY);
 
