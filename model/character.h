@@ -33,9 +33,9 @@ enum SpellsCategory {
 
 enum Condition {
 	GOOD = 0, 
-	ASLEEP = 1, BLINDED =2, POISONED = 3, 
-	DISEASED = 4, PARALYZED = 5, UNCONSCIOUS = 6,
-	DEAD = 7, STONED = 8, ERADICATED = 9
+	ASLEEP = 1, BLINDED =2, SILENCED = 3, DISEASED = 4,  
+	POISONED = 5, PARALYZED = 6, UNCONSCIOUS = 7,
+	DEAD = 8, STONED = 9, ERADICATED = 10
 };
 
 class AttributePair {
@@ -111,11 +111,15 @@ public:
 	int getThievery() const;
 	int getCurrentLevel(bool baseOnly= false) const;
 
+	int getEquipped(int id) const;
+	int getBackpack(int id) const;
+
+
 	//item functions
-	void dropItem(int itemNumber);
+	int dropItem(int itemNumber);
 	void equipItem(int itemNumber);
-	void removeItem(int itemNumber);
-	bool takeItem(int newItem);
+	int removeItem(int itemNumber);
+	bool takeItem(int newItem, int charges);
 	int giveItem(int itemNumber);
 	void useItem(int itemNumber);
 
@@ -128,4 +132,5 @@ public:
 private:
 	//modifier for attribute depends on conditions
 	int conditionModifier(Attribute attribute) const;
+	void applyEquipBonus(int bonusID, int bonusValue);
 };

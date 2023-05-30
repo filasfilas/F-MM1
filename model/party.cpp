@@ -4,7 +4,7 @@
 Party::Party(){
 
 //temporary party autoload
-	for (int i; i<6; i++){
+	for (int i=0; i<6; i++){
 		addCharacter(_roster.getCharacter(i));
 	}
 }

@@ -6,10 +6,10 @@
 const int ITEMS_NUMBER = 255;
 
 enum Item_Restriction {
-	ROBBER =1, SORCERER =2, CLERIC =4,
-	ARCHER =8, PALADIN = 0x10, KNIGHT = 0x20,
+	RESTR_ROBBER =1, RESTR_SORCERER =2, RESTR_CLERIC =4,
+	RESTR_ARCHER =8, RESTR_PALADIN = 0x10, RESTR_KNIGHT = 0x20,
 	
-	GOOD = 0x40, EVIL = 0x80, NEUTRAL = 0xC0	
+	RESTR_GOOD = 0x40, RESTR_EVIL = 0x80, RESTR_NEUTRAL = 0xC0	
 };
 
 class Items {
@@ -38,6 +38,8 @@ class Items {
 		bool isArmor(int itemId) const;
 		bool isShield(int itemId) const;
 		bool isMisc(int itemId) const;
+		bool incompatible(int id1, int id2) const;
+		bool isRestricted(int itemId, Item_Restriction restriction) const;
 
 	private:
 		void loadItemsData();

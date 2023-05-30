@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 #include "../core/State.h"
 #include "../core/Application.h"
@@ -8,12 +9,10 @@
 //#include "../Definitions.h"
 #include "SFML/Graphics.hpp"
 
-const int LABELS_COUNT = 48;
-
-class CharacterDetailState : public State
+class ItemState : public State
 {
 	public:
-		CharacterDetailState (GlobalDataRef gData, Character* currentCharacter);
+		ItemState (GlobalDataRef gData, Character* character, std::string itemActionType);
 
         	void init();
        		void handleInput(const sf::Event& event);
@@ -21,15 +20,15 @@ class CharacterDetailState : public State
         	void draw(float dt );
 		void stop();
 
-		void changeCharacter (Character* newCharacter);
-		void changeCharacter (int characterId);
-		void charDataUpdate();
+		//void removeItem (int id);
         
 	private:
 		GlobalDataRef   gData;
+		std::string 	_itemActionType;
 		Character* _character;
-		int _charId;
-        	//sf::Sprite  _background;
+        	sf::RectangleShape _board;
+		bool	_actionDone;
+		int	_itemNum;
 
-		sf::Text	_txtLabel[LABELS_COUNT];
+		sf::Text	_txtLabel[10];
 };

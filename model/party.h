@@ -18,9 +18,9 @@ class Party
 {
 	public:
 		Party();
-        	bool	addCharacter(Character* newChar);
-        	void 	dismissCharacter(int id);
-        	Character*  getCharacter(int id);
+        bool	addCharacter(Character* newChar);
+        void 	dismissCharacter(int id);
+        Character*  getCharacter(int id);
 		void	swapCharacters(int id1, int id2);
 
 		void share(std::string stockType);

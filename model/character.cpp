@@ -35,6 +35,71 @@ int Character::giveStock (std::string stockType, int value) {
 	return 0;
 }
 
+
+Condition Character::getWorstCondition() const {
+	if (_condition == 0xff) return ERADICATED;
+	if ((_condition >>6) == 0x3) return DEAD;
+	if ((_condition >>5) == 0x5) return STONED;
+	if ((_condition & 0x40) != 0) return UNCONSCIOUS;
+	if ((_condition & 0x20) != 0) return PARALYZED;
+	if ((_condition & 0x10) != 0) return POISONED;
+	if ((_condition & 0x8) != 0) return DISEASED;
+	if ((_condition & 0x4) != 0) return SILENCED;
+	if ((_condition & 0x2) != 0) return BLINDED;
+	if ((_condition & 0x1) != 0) return ASLEEP;
+	return GOOD;
+}
+
+int Character::getEquipped(int id) const {
+	if (id>=_equipped.size()) return 0;
+	return _equipped[id];
+}
+
+int Character::getBackpack(int id) const {
+	if (id>=_backpack.size()) return 0;
+	return _backpack[id];
+}
+
+int Character::dropItem(int itemNumber) {
+// itemNumber is number in "backpack"
+	if (itemNumber>=_backpack.size()) {return 0;}
+	int itemId = _backpack[itemNumber];
+	_backpack.erase(_backpack.begin()+itemNumber);
+	_backpack_charges.erase(_backpack_charges.begin()+itemNumber);
+	return itemId;
+}
+
+int Character::removeItem(int itemNumber) {
+// itemNumber is number in "equipped". Return itemID or "0" if failed.
+	if (itemNumber>=_equipped.size()) {return 0;}
+	if (_backpack.size()>=6) {return 0;}
+
+	int itemID = _equipped[itemNumber];
+	_backpack.push_back(_equipped[itemNumber]);
+	_backpack_charges.push_back(_equipped_charges[itemNumber]);
+	_equipped.erase(_equipped.begin()+itemNumber);
+	_equipped_charges.erase(_equipped_charges.begin()+itemNumber);
+	return itemID;
+}
+
+void Character::equipItem(int itemNumber) {
+// itemNumber is number in "backpack".
+	if (itemNumber>=_backpack.size()) {return;}
+	if (_equipped.size()>=6) {return;}
+	_equipped.push_back(_backpack[itemNumber]);
+	_equipped_charges.push_back(_backpack_charges[itemNumber]);
+	_backpack.erase(_backpack.begin()+itemNumber);
+	_backpack_charges.erase(_backpack_charges.begin()+itemNumber);
+}
+
+bool Character::takeItem(int newItem, int charges) {
+	if (_backpack.size()>=6) return false;
+	_backpack.push_back(newItem);
+	_backpack_charges.push_back(charges);	
+	return true;
+}
+
+
 void Character::clear() {
 	_name="";
 
@@ -78,5 +143,7 @@ void Character::clear() {
 
 	_equipped.clear();
 	_backpack.clear();
+	_equipped_charges.clear();
+	_backpack_charges.clear();
 }
 

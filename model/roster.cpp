@@ -126,7 +126,8 @@ void Roster::readCharacter(int id){
         newChar->_level._permanent = memblock[shift+35];
         newChar->_level._temporary = memblock[shift+36];
         newChar->_age._permanent = memblock[shift+37];
-//byte 38??
+//???? byte 38 is strange
+        newChar->_age._temporary = memblock[shift+38];
 	newChar->_experience = memblock[shift+39]+256*memblock[shift+40]+256*256*memblock[shift+41]+256*256*256*memblock[shift+42];
 	newChar->_SP._temporary = memblock[shift+43]+256*memblock[shift+44];
 	newChar->_SP._permanent = memblock[shift+45]+256*memblock[shift+46];

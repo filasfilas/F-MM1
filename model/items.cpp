@@ -17,6 +17,8 @@ void Items::loadItemsData(){
 
 
 std::string Items::getName(int itemId){
+	if ((itemId<=0)||(itemId>255)) return "";
+
 	std::string name;
 	for (int i=0; i<14; i++){
 		name.push_back(memblock[24*(itemId-1) +i]);
@@ -77,6 +79,21 @@ unsigned int Items::getAC(int itemId) const{
 	if ((isArmor(itemId))||(isShield(itemId))) {
 		return memblock[24*(itemId-1) +23];}
 	else return 0;
+}
+
+bool Items::incompatible(int id1, int id2) const {
+	if (isWeapon(id1)&&isWeapon(id2)) return true;
+	if (isShield(id1)&&isShield(id2)) return true;
+	if (isMissile(id1)&&isMissile(id2)) return true;
+	if (isArmor(id1)&&isArmor(id2)) return true;
+	if (isTwoHanded(id1)&& (isShield(id2)||isTwoHanded(id2))) return true;
+	if (isShield(id1)&& (isShield(id2)||isTwoHanded(id2))) return true;
+	return false;
+}
+
+bool Items::isRestricted(int itemId, Item_Restriction restriction) const {
+	if ((getRestriction(itemId) & restriction) == 0) return false;
+	return true;
 }
 
 bool Items::isCursed(int itemId) const{

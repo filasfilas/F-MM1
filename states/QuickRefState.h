@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 
 #include "../core/State.h"
 #include "../core/Application.h"
@@ -8,28 +7,23 @@
 //#include "../Definitions.h"
 #include "SFML/Graphics.hpp"
 
-const int LABELS_COUNT = 48;
 
-class CharacterDetailState : public State
+class QuickRefState : public State
 {
 	public:
-		CharacterDetailState (GlobalDataRef gData, Character* currentCharacter);
+		QuickRefState (GlobalDataRef gData);
 
         	void init();
        		void handleInput(const sf::Event& event);
         	void update (float dt);
         	void draw(float dt );
 		void stop();
-
-		void changeCharacter (Character* newCharacter);
-		void changeCharacter (int characterId);
-		void charDataUpdate();
         
 	private:
 		GlobalDataRef   gData;
-		Character* _character;
-		int _charId;
+
         	//sf::Sprite  _background;
 
-		sf::Text	_txtLabel[LABELS_COUNT];
+		sf::Text	titleText[3];
+		sf::Text	charInfoText[18];
 };

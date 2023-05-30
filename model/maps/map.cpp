@@ -1,5 +1,5 @@
 #include "map.h"
-#include "maze00.h"
+//#include "maze00.h"
 #include <fstream>
 #include <iostream>
 

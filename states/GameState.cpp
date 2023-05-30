@@ -1,5 +1,6 @@
 #include "MenuState.h"
 #include "GameState.h"
+#include "QuickRefState.h"
 //#include "../gui/Utility.h"
 #include <iostream>
 
@@ -31,6 +32,10 @@ void GameState::handleInput(const sf::Event& event)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){turn (-1);}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { move(1);}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { move(-1);}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) { 
+			gData -> mStates.addState(StatePtr (new QuickRefState(gData)));
+		}
 	}
 }
 
