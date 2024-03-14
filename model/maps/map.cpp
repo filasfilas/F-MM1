@@ -30,8 +30,6 @@ Map::Map(){
 
 void Map::select(int id){
     _id = id;
-std::cout<<_id<<std::endl;
-
 	_regionWalls.clear();
 	for (int i=0; i<256; i++) {
 		_regionWalls.push_back(_walls[256*id + i]);

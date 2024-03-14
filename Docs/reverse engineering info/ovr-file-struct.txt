@@ -1,0 +1,155 @@
+This info describes Might and Magic 1 files structure. It is used for reverse engineering of MM1.
+Author: https://github.com/filasfilas
+
+
+*.ovr file:
+---------------------------------------------------------------------------------
+Every of 55 files includes information about a single maze.
+List of file names see below. 
+
+A file has the following structure:
+
+1) Header. Used by original MM1.exe. Don't need for remake.
+2) Code section. Includes scripts for the maze. To be fully rewrite in c++.
+3) Data section. Icludes: map constants (see below), script info (coordinate, direction, offset of script code), strings (messages used at maze)
+
+
+Bytes info (Header)
+-------------------------------------------------
+0-1	"magic number" = F2 00. Used by mm.exe to check if it is "ovr" file.
+3-4	adress offset (8F F4) to load code
+4-5	size of code section
+6-7	adress offset (40 C9) to load data
+8-9	size of data section
+a-b	(00 00)
+c-d	offset of code start
+
+
+Bytes info (Code section)
+-------------------------------------------------
+binary of scripts
+
+
+Bytes info (Data section)
+-------------------------------------------------
+51 bytes of maze data:
+0
+1
+2-3	sprite1 ID
+4-5	sprite2 ID
+6-7	sprite3 ID
+8-9
+10
+11-12
+13
+14-15
+16
+17-18
+19
+20
+21
+22
+23	X coordinate of safe place
+24	Y coordinate of safe place
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39-40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50	number of scripts
+
+
+coordinates of scripts in "YX" format. 1 byte per script
+direction of scripts (means that the script launches if only your party has correct direction). 1 byte per script
+offset of script code. 2 bytes per script
+Strings of messages (c-string)
+
+
+Direction table
+-------------------------------------------------
+Direction | North | East | South | West|
+Bit       | 7  6  | 5 4  | 3  2  | 1 0 |
+
+00 - no run
+11 - script runs
+
+For example, west+south = 0F 
+
+
+RegionId table
+-----------------------------------------------------------------
+regionId | ovr file | description
+0	sorpigal	
+1	portsmit	
+2	algary	
+3	dusk	
+4	erliquin	
+5	cave1	Sorpigal Dungeon
+6	cave2	The Crazed Wizard Cave
+7	cave3	Portsmith Dungeon
+8	cave4	Erliquin Dungeon
+9	cave5	Dusk Dungeon
+10	cave6	The Caves at the Korin Bluffs
+11	cave7	The Volcano
+12	cave8	The Magic Square
+13	cave9	The Medusa Lair
+14	areaA1	
+15	areaA2	
+16	areaA3	
+17	areaA4	
+18	areaB1	
+19	areaB2	
+20	areaB3	
+21	areaB4	
+22	areaC1	
+23	areaC2	
+24	areaC3	
+25	areaC4	
+26	areaD1	
+27	areaD2	
+28	areaD3	
+29	areaD4	
+30	areaE1	
+31	areaE2	
+32	areaE3	
+33	areaE4	
+34	doom	The Fabled Castle Doom
+35	blackrn	Castle Blackridge North
+36	blackrs	Castle Blackridge South
+37	qvl1	The Ancient Wizard Lair 1
+38	qvl2	The Ancient Wizard Lair 2
+39	rwl1	The Warrior's Stronghold 1
+40	rwl2	The Warrior's Stronghold 2
+41	enf1	The Stronghold in the Enchanted Forest 1
+42	enf2	The Stronghold in the Enchanted Forest 2
+43	whitew	Castle White Wolf
+44	dragad	Castle Dragadune 1
+45	udrag1	Castle Dragadune 2
+46	udrag2	Castle Dragadune 3
+47	udrag3	Castle Dragadune 4
+48	demon	The Soul Maze
+49	alamar	Castle Alamar
+50	pp1	The Fabled Building of Gold 1
+51	pp2	The Fabled Building of Gold 2
+52	pp3	The Fabled Building of Gold 3
+53	pp4	The Fabled Building of Gold 4
+54	astral	The Astral Plane

@@ -43,6 +43,6 @@ class Items {
 
 	private:
 		void loadItemsData();
-		const std::string   dataFileName = "data/mm1.dat";
+		const std::string   dataFileName = "data/items.dat";
 		unsigned char memblock[6120]; 
 };

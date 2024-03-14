@@ -8,7 +8,6 @@ Monsters::Monsters(){
 
 void Monsters::loadMonstersData(){
     std::ifstream file(dataFileName, std::ios::in | std::ios::binary);
-    file.seekg(6120, std::ios::beg);
     if(!file){
         std::cerr<<"Cant't open file "<<dataFileName<< std::endl;
     }

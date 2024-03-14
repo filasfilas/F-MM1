@@ -49,6 +49,6 @@ class Monsters {
 
 	private:
 		void loadMonstersData();
-		const std::string   dataFileName = "data/mm1.dat";
+		const std::string   dataFileName = "data/monsters.dat";
 		unsigned char memblock[195*32]; 
 };
