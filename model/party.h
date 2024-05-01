@@ -26,7 +26,8 @@ class Party
 		void share(std::string stockType);
 		int gatherAll(std::string stockType);
 		void save();
-
+		bool hasLight(bool _spendLight);
+		
 		Roster	_roster;
 
 	private:

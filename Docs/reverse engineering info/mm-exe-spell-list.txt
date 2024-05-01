@@ -1,0 +1,35 @@
+This info describes Might and Magic 1 files structure. It is used for reverse engineering of MM1.
+Author: https://github.com/filasfilas
+
+
+mm.exe file:
+spells list
+---------------------------------------------------------------------------------
+Spell database is a part of mm.exe.
+There are 94 spells (47 cleric and 47 sorcerer)
+
+
+Spells offsets
+------------------------------------------------
+1cd8c - parameter 1 (94 bytes)
+1cdea - parameter 2 (94 bytes)
+
+Firstly, 47 Cleric spells, than 47 Sorcerer spells
+
+
+Bytes info
+-------------------------------------------------
+parameter 1
+	bit 0 - combat spell, bit 1 - non-combat spell, bit 2 - cast on a character, 
+	bit 3 -  cast on a monster, bit 4 - outdoor spell.      
+	bits:   |7 6 5 4 3 2 1 0|
+		    |     |o|m|p|n|c|
+
+parameter 2
+	bit 7 - SP spell cost per level. Gems cost.
+	bits:   |7 6 5 4 3 2 1 0|
+		    |S|    gems     |
+
+
+Spell scripts are functions of mm.exe
+-------------------------------------------------

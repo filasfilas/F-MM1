@@ -10,6 +10,7 @@ GameModel::GameModel()
 	_posY = 3;
 	_mapId = 1;
 	_direction = N;
+	_darkness=false;
 }
 
 void GameModel::setPosition(int X, int Y){
@@ -41,6 +42,12 @@ bool GameModel::canMove (int dirX, int dirY){
 }
 
 void GameModel::cellAction() {
+	_darkness=false;
+	if (_map.isDarkCell(_posX, _posY)) {
+		_darkness = _party.hasLight(true);
+	}
+	if (_map.isDarkMap() && !_party.hasLight(false)) {_darkness = true;}
+
 	if (!_map.isSpecial(_posX, _posY)) {return;}
 	_map._scripts[_posX][_posY];
 	//std::cout<<"Special!"<<std::endl;

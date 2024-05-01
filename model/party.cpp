@@ -7,6 +7,8 @@ Party::Party(){
 	for (int i=0; i<6; i++){
 		addCharacter(_roster.getCharacter(i));
 	}
+//temporary party light
+	_protections[PARTY_LIGHT]=256;
 }
 
 bool Party::addCharacter(Character* newChar){
@@ -56,3 +58,9 @@ int Party::gatherAll(std::string stockType){
 void Party::save(){
 	_roster.saveRosterFile();
 }
+
+bool Party::hasLight(bool _spendLight){
+	bool result = _protections[PARTY_LIGHT];
+	if ((_spendLight)&&(result)) {_protections[PARTY_LIGHT]--;}
+	return result;
+};

@@ -1,4 +1,5 @@
 #include "map.h"
+#include "mapdata.h"
 //#include "maze00.h"
 #include <fstream>
 #include <iostream>
@@ -52,7 +53,7 @@ bool Map::isNonMagic(int posX, int posY) {
 bool Map::isDangerous(int posX, int posY) {
 	return (_passage[getOffset(posX, posY)] & 0x8) != 0;
 }
-bool Map::isDarkness(int posX, int posY) {
+bool Map::isDarkCell(int posX, int posY) {
 	return (_passage[getOffset(posX, posY)] & 0x20) != 0;
 }
 bool Map::isSpecial(int posX, int posY) {
@@ -66,6 +67,11 @@ void Map::clearSpecial(int posX, int posY) {
 int Map::getOffset(int posX, int posY) {
 	return _id*256+16*posY+posX;
 }
+
+bool Map::isDarkMap(){
+	return _mapdata[_id][46]&0x1;
+}
+
 
 //to do
 void Map::loadScripts() {

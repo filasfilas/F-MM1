@@ -34,5 +34,6 @@ class GameModel
 
 	private:	
 		void cellAction();
+		bool _darkness;
 
 };

@@ -13,9 +13,10 @@ class Map
 		unsigned int getPassage(int posX, int posY);
 		bool isNonMagic(int posX, int posY);
 		bool isDangerous(int posX, int posY);
-		bool isDarkness(int posX, int posY);
+		bool isDarkCell(int posX, int posY);
 		bool isSpecial(int posX, int posY);
 		void clearSpecial(int posX, int posY);
+		bool isDarkMap();
 		void reset();
 		std::function<void()> _scripts[16][16];
 
