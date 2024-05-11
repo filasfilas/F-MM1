@@ -7,6 +7,7 @@
 GameState::GameState(GlobalDataRef gData, int townId) 
 : gData(gData)
 , _mazeRender(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().y)
+, _msgBox(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().y)
 {
 	_startTownId = townId-1;	
 	//gData -> mAssets.loadTexture(Textures::MainMenu, "media/images/MM1-map.png");
@@ -78,6 +79,7 @@ void GameState::update (float dt)
 void GameState::draw(float dt) {
 	//_mazeRender.render(_xPos, _yPos, _angle);
 	_mazeRender.render(_xPos, _yPos, _dirX, _dirY, _planeX, _planeY);
+	_msgBox.draw();
 }
 
 void GameState::turn (int turnDir){

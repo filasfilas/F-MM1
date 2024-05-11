@@ -5,6 +5,7 @@
 #include "../core/Application.h"
 #include "../model/GameModel.h"
 #include "../render/MazeRender.h"
+#include "../gui/MessageBox.h"
 
 #include "../ResourceIdentifiers.h"
 //#include "../Definitions.h"
@@ -31,6 +32,7 @@ class GameState : public State
 	private:
 		GlobalDataRef	gData;
 		MazeRender _mazeRender;
+		MessageBox _msgBox;
 		int	_startTownId;
 		float _xPos, _yPos, _dirX, _dirY, _planeX, _planeY;	//vectors for render
 		int _angle; 		//angle for render
