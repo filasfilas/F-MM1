@@ -110,6 +110,7 @@ public:
 	int getArmorClass(bool baseOnly= false) const;
 	int getThievery() const;
 	int getCurrentLevel(bool baseOnly= false) const;
+	bool isDead();
 
 	int getEquipped(int id) const;
 	int getBackpack(int id) const;

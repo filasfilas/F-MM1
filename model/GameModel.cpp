@@ -48,9 +48,15 @@ void GameModel::cellAction() {
 	}
 	if (_map.isDarkMap() && !_party.hasLight(false)) {_darkness = true;}
 
-	if (!_map.isSpecial(_posX, _posY)) {return;}
-	_map._scripts[_posX][_posY];
-	//std::cout<<"Special!"<<std::endl;
+	if (_map.isSpecial(_posX, _posY)) {
+		_map._scripts[_posX][_posY];
+	}else{
+		//encounter if any
+	}
+
+	if (_party.isDead()){
+	//TO DO:  if party is dead goto dead script
+	}
 }
 
 bool GameModel::equipItem (Character* character, int itemNumber) {

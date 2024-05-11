@@ -64,3 +64,12 @@ bool Party::hasLight(bool _spendLight){
 	if ((_spendLight)&&(result)) {_protections[PARTY_LIGHT]--;}
 	return result;
 };
+
+bool Party::isDead(){
+	for (int i=0; i<_party.size(); i++){
+		if(!_party[i] -> isDead()) {
+			return false;		
+		}
+	}
+	return true;
+};

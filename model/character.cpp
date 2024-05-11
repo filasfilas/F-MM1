@@ -147,3 +147,8 @@ void Character::clear() {
 	_backpack_charges.clear();
 }
 
+bool Character::isDead() {
+// so character cant do anything (ASLEEP, ERADICATED, DEAD, STONED, UNCONSCIOUS)
+	if ((_condition & 0b11000001) != 0) return true;
+	return false;
+}

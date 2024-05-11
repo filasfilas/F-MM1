@@ -27,6 +27,7 @@ class Party
 		int gatherAll(std::string stockType);
 		void save();
 		bool hasLight(bool _spendLight);
+		bool isDead();
 		
 		Roster	_roster;
 
