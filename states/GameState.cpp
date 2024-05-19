@@ -7,7 +7,7 @@
 GameState::GameState(GlobalDataRef gData, int townId) 
 : gData(gData)
 , _mazeRender(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().y)
-, _gui(&(gData -> mWindow))
+, _gui(&(gData -> mWindow), gData)
 {
 	_startTownId = townId-1;	
 	//gData -> mAssets.loadTexture(Textures::MainMenu, "media/images/MM1-map.png");
@@ -28,8 +28,8 @@ void GameState::init() {
 
 void GameState::handleInput(const sf::Event& event)
 {
-        if (event.type == sf::Event::KeyPressed)
-        {
+	if (event.type == sf::Event::KeyPressed)
+    {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {turn (1);}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){turn (-1);}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { move(1);}
@@ -39,6 +39,7 @@ void GameState::handleInput(const sf::Event& event)
 			gData -> mStates.addState(StatePtr (new QuickRefState(gData)));
 		}
 	}
+	_gui.handleInput();
 }
 
 void GameState::update (float dt)

@@ -1,5 +1,7 @@
 #include "Face.h"
 #include "Utility.h"
+#include "../model/GameModel.h"
+#include <iostream>
 
 Face::Face(sf::RenderWindow* target, int number)
 :window (target),
@@ -8,7 +10,7 @@ _number(number)
 	float X, Y;
 	
 	X = 60.0;
-	Y= 75.0;
+	Y = 75.0;
 	mShape.setSize(sf::Vector2f(X,Y));
 
 	if (_number%2 == 0) {
@@ -25,13 +27,36 @@ _number(number)
 	mShape.setFillColor(sf::Color::Black);
 	mShape.setOutlineColor(sf::Color::Green);
 	mShape.setOutlineThickness(2);
+}
 
+void Face::setCallback(std::function<void(int)> callback)
+{
+    mCallback = callback;
 }
-/*
-void Face::setTextString(sf::String str){
-	mText.setString(str);
+
+void Face::handleInput()
+{
+	if (isClicked (sf::Mouse::Left)){
+		mCallback(_number);
+		std::cout<<_number<<std::endl;
+	}
 }
-*/
+
+bool Face::isClicked(sf::Mouse::Button button)
+{
+	if (sf::Mouse::isButtonPressed(button))
+	{
+		int x = mShape.getPosition().x;
+		int y = mShape.getPosition().y;
+		sf::IntRect buttonRect(x, y, mShape.getSize().x, mShape.getSize().y);
+
+		if(buttonRect.contains(sf::Mouse::getPosition()))
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 void Face::draw()
 {

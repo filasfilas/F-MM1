@@ -1,13 +1,20 @@
 #include "GUI.h"
 #include "Utility.h"
+#include "../states/CharacterDetailState.h"
+#include <iostream>
 
-GUI::GUI(sf::RenderWindow* target)
+GUI::GUI(sf::RenderWindow* target, GlobalDataRef gData)
 :window (target)
+,_gData(gData)
 , _msgBox(window, window->getSize().x,  window->getSize().y)
 {
 	for (int i=0; i<6; i++){
 		_faces.push_back(new Face(window, i));
-	}			
+	}		
+	for (int i=0; i<6; i++){
+		std::function<void(int)> pFunc = GUI::showCharacterInfo;
+		_faces[i] -> setCallback(pFunc);
+	}
 }
 
 
@@ -20,4 +27,22 @@ void GUI::draw()
 	//window->draw(mShape);
 	//window->draw(mText);
 }
+
+void GUI::handleInput()
+{
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+		for (int i=0; i<6; i++){
+			_faces[i]->handleInput();
+		}
+	}
+}
+
+void GUI::showCharacterInfo(int id){
+	Character* character = _gData-> mGameModel._party.getCharacter(id);
+	if (character != nullptr){
+		_gData -> mStates.addState(StatePtr (new CharacterDetailState(_gData, character)));
+	}
+
+}
+
 
