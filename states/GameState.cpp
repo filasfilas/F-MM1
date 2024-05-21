@@ -10,7 +10,6 @@ GameState::GameState(GlobalDataRef gData, int townId)
 , _gui(&(gData -> mWindow), gData)
 {
 	_startTownId = townId-1;	
-	//gData -> mAssets.loadTexture(Textures::MainMenu, "media/images/MM1-map.png");
 	//gData -> mAssets.loadTexture(Textures::MenuButton, "media/images/gui/Button.png");
 
 

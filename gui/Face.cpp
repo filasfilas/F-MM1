@@ -1,11 +1,13 @@
 #include "Face.h"
 #include "Utility.h"
 #include "../model/GameModel.h"
+#include "../states/CharacterDetailState.h"
 #include <iostream>
 
-Face::Face(sf::RenderWindow* target, int number)
-:window (target),
-_number(number)
+Face::Face(sf::RenderWindow* target, GlobalDataRef gData, int number)
+:window (target)
+,_gData(gData)
+,_number(number)
 {
 	float X, Y;
 	
@@ -23,10 +25,10 @@ _number(number)
 	//Y=200.0;
 
 	mShape.setPosition(X, Y);
-
-	mShape.setFillColor(sf::Color::Black);
-	mShape.setOutlineColor(sf::Color::Green);
-	mShape.setOutlineThickness(2);
+    mShape.setTexture(&(gData -> mAssets.getTexture(Textures::Face)), true);
+	//mShape.setFillColor(sf::Color::Black);
+	//mShape.setOutlineColor(sf::Color::Green);
+	//mShape.setOutlineThickness(2);
 }
 
 void Face::setCallback(std::function<void(int)> callback)
@@ -37,8 +39,12 @@ void Face::setCallback(std::function<void(int)> callback)
 void Face::handleInput()
 {
 	if (isClicked (sf::Mouse::Left)){
-		mCallback(_number);
-		std::cout<<_number<<std::endl;
+		//mCallback(_number);
+		//std::cout<<_number<<std::endl;
+		Character* character = _gData-> mGameModel._party.getCharacter(_number);
+		if (character != nullptr){
+			_gData -> mStates.addState(StatePtr (new CharacterDetailState(_gData, character)));
+		}
 	}
 }
 
@@ -50,7 +56,7 @@ bool Face::isClicked(sf::Mouse::Button button)
 		int y = mShape.getPosition().y;
 		sf::IntRect buttonRect(x, y, mShape.getSize().x, mShape.getSize().y);
 
-		if(buttonRect.contains(sf::Mouse::getPosition()))
+		if(buttonRect.contains(sf::Mouse::getPosition(*window)))
 		{
 			return true;
 		}

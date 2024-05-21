@@ -8,12 +8,13 @@ GUI::GUI(sf::RenderWindow* target, GlobalDataRef gData)
 ,_gData(gData)
 , _msgBox(window, window->getSize().x,  window->getSize().y)
 {
+	gData -> mAssets.loadTexture(Textures::Face, "../media/images/gui/fff.png");
 	for (int i=0; i<6; i++){
-		_faces.push_back(new Face(window, i));
+		_faces.push_back(new Face(window, _gData, i));
 	}		
 	for (int i=0; i<6; i++){
-		std::function<void(int)> pFunc = GUI::showCharacterInfo;
-		_faces[i] -> setCallback(pFunc);
+		//std::function<void(int)> pFunc = GUI::showCharacterInfo;
+		//_faces[i] -> setCallback(pFunc);
 	}
 }
 

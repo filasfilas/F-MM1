@@ -16,6 +16,7 @@ namespace Textures {
 		MainMenu,
 		MenuButton,
 		InstructionScroll,
+        Face,
 	};
 }
 
