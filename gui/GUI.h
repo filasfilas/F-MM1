@@ -16,6 +16,7 @@ class GUI
 		//void setTextString(sf::String str);
 		void draw();
 		void handleInput();
+		void update();
 
 
 	private:

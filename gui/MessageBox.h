@@ -7,7 +7,8 @@ class MessageBox
 	public:
 
 			MessageBox(sf::RenderWindow* target, int viewWidth, int viewHeight);
-					
+
+		void setFont(sf::Font* font);					
 		void setTextString(sf::String str);
 		void draw();
 

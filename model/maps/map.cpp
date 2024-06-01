@@ -47,15 +47,16 @@ std::vector<unsigned int> Map::getWalls() const{
 std::string Map::getPassage(int posX, int posY, DIRECTION dir){
 	std::string result="";
 	int resultType = -1;
-	if (!((_walls[getOffset(posX, posY)] & 0x55)&dir)){
+	if ((_walls[getOffset(posX, posY)] &dir) == 0){
 	//no wall
-		if(!((_passage[getOffset(posX, posY)] & 0x55)&dir)){result = "passage";} //no wall, passage
+		if(((_passage[getOffset(posX, posY)] & 0x55) &dir) ==0){result = "passage";} //no wall, passage
 		else{result = "barrier";}	//no wall, no passage
 	}else{
 	//a wall
-		if(!((_passage[getOffset(posX, posY)] & 0x55)&dir)){resultType = _mapdata[_id][30];} //wall, type0
-		if(!((_passage[getOffset(posX, posY)] & 0xaa)&dir)){resultType = _mapdata[_id][31];} //wall, type1
-		if(!((_passage[getOffset(posX, posY)] & 0xff)&dir)){resultType = _mapdata[_id][32];} //wall, type2
+		resultType = _mapdata[_id][32]; //wall, type2
+		if(!((_walls[getOffset(posX, posY)] & 0x55)&dir)){resultType = _mapdata[_id][31];} //wall, type1
+		else if(!((_walls[getOffset(posX, posY)] & 0xaa)&dir)){resultType = _mapdata[_id][30];} //wall, type0
+
 
 		//a wall and no passage
 		if((_passage[getOffset(posX, posY)] & 0x55)&dir) {
@@ -64,7 +65,8 @@ std::string Map::getPassage(int posX, int posY, DIRECTION dir){
 				case 1: result = "locked"; break;
 				case 2: result = "too dence"; break;
 				case 3: result = "impassable"; break;
-				//case 4: result = "rough seas"; break;
+				case 4: result = "rough seas"; break;
+				case 5: result = "too windy"; break;
 			}
 		}else{
 			//a wall and passage

@@ -41,11 +41,17 @@ bool GameModel::canMove (int dirX, int dirY){
 }
 
 bool GameModel::canMove(DIRECTION dir){
-	if (_map.getPassage(_posX, _posY, dir) == "passage") {return true;}
-	else {return false;}
+	std::string str;
+	str = _map.getPassage(_posX, _posY, dir);
+	if (str == "passage") {return true;}
+	else {
+		addMessage(str);
+		return false;
+	}
 }
 
 void GameModel::cellAction() {
+	_messageOutbox.clear();
 	_darkness=false;
 	if (_map.isDarkCell(_posX, _posY)) {
 		_darkness = _party.hasLight(true);
@@ -61,6 +67,20 @@ void GameModel::cellAction() {
 	if (_party.isDead()){
 	//TO DO:  if party is dead goto dead script
 	}
+}
+
+void GameModel::addMessage(std::string msg){
+	_messageOutbox.push_back(msg);
+}
+
+std::string GameModel::getMessage(){
+	std::string result = "";
+	if(!_messageOutbox.empty()) {
+		result = _messageOutbox.front();
+		_messageOutbox.erase(_messageOutbox.begin());
+	}
+
+	return result;	
 }
 
 bool GameModel::equipItem (Character* character, int itemNumber) {

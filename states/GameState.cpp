@@ -73,8 +73,8 @@ void GameState::update (float dt)
 	_xPos = (gData -> mGameModel._posX) +0.5;
 	_yPos = (gData -> mGameModel._posY) +0.5;
 	directionToVector(gData -> mGameModel._direction);
-//std::cout<<gData -> mGameModel._posX<<" "<<gData -> mGameModel._posY;
-//std::cout<<" "<<gData -> mGameModel._direction<<std::endl;
+
+	_gui.update();
 }
 
 void GameState::draw(float dt) {

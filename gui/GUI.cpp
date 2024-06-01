@@ -8,6 +8,8 @@ GUI::GUI(sf::RenderWindow* target, GlobalDataRef gData)
 ,_gData(gData)
 , _msgBox(window, window->getSize().x,  window->getSize().y)
 {
+	_msgBox.setFont(&(gData-> mAssets.getFont(Fonts::Main)));
+
 	gData -> mAssets.loadTexture(Textures::Face, "../media/images/gui/fff.png");
 	for (int i=0; i<6; i++){
 		_faces.push_back(new Face(window, _gData, i));
@@ -36,6 +38,11 @@ void GUI::handleInput()
 			_faces[i]->handleInput();
 		}
 	}
+}
+
+void GUI::update()
+{
+	_msgBox.setTextString(_gData -> mGameModel.getMessage());
 }
 
 void GUI::showCharacterInfo(int id){

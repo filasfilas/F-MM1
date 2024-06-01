@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <queue>
+#include <vector>
 
 #include "party.h"
 #include "items.h"
@@ -28,6 +29,9 @@ class GameModel
 		bool canMove(DIRECTION dir);
 		bool canMove(int dirX, int dirY);
 
+		std::string getMessage();
+		void		addMessage(std::string msg);
+
 		bool equipItem (Character* character, int itemNumber);
 		bool removeItem (Character* character, int itemNumber);
 		bool transferItem (Character* sender, Character* receiver, int itemNumber);
@@ -37,5 +41,6 @@ class GameModel
 		void cellAction();
 		//void update();
 		bool _darkness;
+		std::vector<std::string> _messageOutbox;
 
 };
