@@ -37,7 +37,11 @@ bool GameModel::canMove (int dirX, int dirY){
 	if ((dirX==1)&&(dirY==0)) {dir = E;}
 	if ((dirX==-1)&&(dirY==0)) {dir = W;}
 
-	if ((_map.getPassage(_posX, _posY) & dir) == 0) {return true;}
+	canMove(dir);
+}
+
+bool GameModel::canMove(DIRECTION dir){
+	if (_map.getPassage(_posX, _posY, dir) == "passage") {return true;}
 	else {return false;}
 }
 

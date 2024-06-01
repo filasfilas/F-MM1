@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include <functional>
 #include "../ModelDefinitions.h"
 
@@ -10,13 +11,14 @@ class Map
 		Map();
 		void select (int id);
 		std::vector<unsigned int> getWalls() const;
-		unsigned int getPassage(int posX, int posY);
+		std::string getPassage(int posX, int posY, DIRECTION dir);
 		bool isNonMagic(int posX, int posY);
 		bool isDangerous(int posX, int posY);
 		bool isDarkCell(int posX, int posY);
 		bool isSpecial(int posX, int posY);
 		void clearSpecial(int posX, int posY);
 		bool isDarkMap();
+		bool canMove(int posX, int posY, DIRECTION dir);
 		void reset();
 		std::function<void()> _scripts[16][16];
 

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 
+
 Map::Map(){
 	//_id =0;
 
@@ -43,8 +44,36 @@ std::vector<unsigned int> Map::getWalls() const{
 	return _regionWalls;
 }
 
-unsigned int  Map::getPassage(int posX, int posY) {
-	return (_passage[getOffset(posX, posY)] & 0x55);
+std::string Map::getPassage(int posX, int posY, DIRECTION dir){
+	std::string result="";
+	int resultType = -1;
+	if (!((_walls[getOffset(posX, posY)] & 0x55)&dir)){
+	//no wall
+		if(!((_passage[getOffset(posX, posY)] & 0x55)&dir)){result = "passage";} //no wall, passage
+		else{result = "barrier";}	//no wall, no passage
+	}else{
+	//a wall
+		if(!((_passage[getOffset(posX, posY)] & 0x55)&dir)){resultType = _mapdata[_id][30];} //wall, type0
+		if(!((_passage[getOffset(posX, posY)] & 0xaa)&dir)){resultType = _mapdata[_id][31];} //wall, type1
+		if(!((_passage[getOffset(posX, posY)] & 0xff)&dir)){resultType = _mapdata[_id][32];} //wall, type2
+
+		//a wall and no passage
+		if((_passage[getOffset(posX, posY)] & 0x55)&dir) {
+			switch (resultType){
+				case 0: result = "solid"; break;
+				case 1: result = "locked"; break;
+				case 2: result = "too dence"; break;
+				case 3: result = "impassable"; break;
+				//case 4: result = "rough seas"; break;
+			}
+		}else{
+			//a wall and passage
+			result = "passage";
+			if (resultType == 4) {result = "rough seas";}
+		}
+	}
+	//std::cout<<result;
+	return result; 
 }
 
 bool Map::isNonMagic(int posX, int posY) {
@@ -70,6 +99,12 @@ int Map::getOffset(int posX, int posY) {
 
 bool Map::isDarkMap(){
 	return _mapdata[_id][46]&0x1;
+}
+
+bool Map::canMove(int posX, int posY, DIRECTION dir){
+
+
+	return true;
 }
 
 

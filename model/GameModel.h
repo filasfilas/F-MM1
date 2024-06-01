@@ -25,6 +25,7 @@ class GameModel
 		void setPosition(int X, int Y);
 		void selectMap(int id);
 		void setDirection(DIRECTION dir);
+		bool canMove(DIRECTION dir);
 		bool canMove(int dirX, int dirY);
 
 		bool equipItem (Character* character, int itemNumber);
@@ -34,6 +35,7 @@ class GameModel
 
 	private:	
 		void cellAction();
+		//void update();
 		bool _darkness;
 
 };
