@@ -12,13 +12,14 @@ MessageBox::MessageBox(sf::RenderWindow* target, int viewWidth, int viewHeight)
 	X = (5/7.0)*viewWidth;
 	Y= 0.2*viewHeight;
 	mShape.setSize(sf::Vector2f(X,Y));
+//	centerOrigin(mShape);
 
 	mShape.setFillColor(sf::Color::Black);
 	mShape.setOutlineColor(sf::Color::Green);
 	mShape.setOutlineThickness(2);
 
-	centerOrigin(mText);
-	mText.setPosition(mShape.getPosition());
+	mText.setPosition(viewWidth/2.0 ,mShape.getPosition().y);
+	//centerOrigin(mText);
 
 }
 

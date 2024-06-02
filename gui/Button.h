@@ -24,7 +24,7 @@ class Button
 		
 		void setSize(sf::Vector2f size);
 		void setTextString(sf::String str);
-		void setTextAlign(HorizontalAlign, VerticalAlign=VerticalAlign::CENTER);
+		//void setTextAlign(HorizontalAlign, VerticalAlign=VerticalAlign::CENTER);
 		bool isClicked(sf::Mouse::Button button, const sf::RenderWindow& window);
 
 		void draw(sf::RenderWindow& window);

@@ -98,7 +98,7 @@ void TitleState::stop(){
 	width = 800;
 	height=600;
 
-    	gData -> mWindow.create (sf::VideoMode(width, height), APP_NAME, sf::Style::Close);
+    gData -> mWindow.create (sf::VideoMode(width, height), APP_NAME, sf::Style::Close);
 	gData -> mWindow.setPosition (sf::Vector2i(0,0));
 
 }

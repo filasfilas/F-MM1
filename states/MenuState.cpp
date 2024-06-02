@@ -26,30 +26,29 @@ void MenuState::init() {
 	sf::Sprite sprite;
 	sf::Text text;
 
-	sprite.setTexture(gData -> mAssets.getTexture(Textures::MenuButton));
-    	sprite.setScale(1.5, 0.8);
 	centerOrigin(sprite);
+	sprite.setOrigin(sprite.getLocalBounds().width / 2.0), sprite.getLocalBounds().height / 2.0);
+	sprite.setTexture(gData -> mAssets.getTexture(Textures::MenuButton));
+    sprite.setScale(1.5, 0.8);
+
+	centerOrigin(text);
 	text.setFont(gData-> mAssets.getFont(Fonts::Main));
 
 	//create new character
 	text.setString(gData -> mStringsDB.getString(CreateNewCharacter));
 	newCharBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,100));
-	newCharBtn.setTextAlign(HorizontalAlign::CENTER);
 
 	//view all character
 	text.setString(gData -> mStringsDB.getString(ViewAllCharacters));
 	viewAllBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,200));
-	viewAllBtn.setTextAlign(HorizontalAlign::CENTER);
 
 	//go to town
 	text.setString(gData -> mStringsDB.getString(GoToTown));
 	playBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,300));
-	playBtn.setTextAlign(HorizontalAlign::CENTER);
 
 	//exit button
 	text.setString(gData -> mStringsDB.getString(ExitGame));
 	exitBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,400));
-	exitBtn.setTextAlign(HorizontalAlign::CENTER);
 }
 
 void MenuState::handleInput(const sf::Event& event)
@@ -68,6 +67,7 @@ void MenuState::handleInput(const sf::Event& event)
 	}
 	if (exitBtn.isClicked(sf::Mouse::Left, gData -> mWindow)) {
 		gData -> mStates.removeState();
+		gData -> mMusic.stop();
 	}
 	
 //temporary town selector

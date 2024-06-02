@@ -14,15 +14,6 @@ Button::Button(sf::Sprite sprite, sf::Text text, sf::Vector2f position)
 	mText.setPosition(position);
 }
 
-/*
-void Button::setButton(sf::Sprite sprite, sf::Text text)
-{
-	mSprite = sprite;
-	mText = text; 
-	//centerOrigin(mText);
-	mText.setPosition(mSprite.getPosition());
-}
-*/
 
 void Button::setSize(sf::Vector2f size){
 	mSize=size;
@@ -35,14 +26,6 @@ void Button::setSize(sf::Vector2f size){
 	mSprite.setScale(mNewScale);
 }
 
-void Button::setTextAlign(HorizontalAlign horizAlign, VerticalAlign verAlign)
-{
-	textHorizAlign = horizAlign;
-	textVertAlign = verAlign;
-	if (textHorizAlign == HorizontalAlign::CENTER){
-		centerOrigin(mText);
-	}
-}
 
 void Button::setTextString(sf::String str){
 	mText.setString(str);
