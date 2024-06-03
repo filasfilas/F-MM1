@@ -27,7 +27,7 @@ void MenuState::init() {
 	sf::Text text;
 
 	centerOrigin(sprite);
-	sprite.setOrigin(sprite.getLocalBounds().width / 2.0), sprite.getLocalBounds().height / 2.0);
+	//sprite.setOrigin(sprite.getLocalBounds().width / 2.0), sprite.getLocalBounds().height / 2.0);
 	sprite.setTexture(gData -> mAssets.getTexture(Textures::MenuButton));
     sprite.setScale(1.5, 0.8);
 
