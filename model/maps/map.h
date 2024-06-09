@@ -12,18 +12,20 @@ class Map
 		void select (int id);
 		std::vector<unsigned int> getWalls() const;
 		std::string getPassage(int posX, int posY, DIRECTION dir);
+
 		bool isNonMagic(int posX, int posY);
 		bool isDangerous(int posX, int posY);
 		bool isDarkCell(int posX, int posY);
 		bool isSpecial(int posX, int posY);
 		void clearSpecial(int posX, int posY);
 		bool isDarkMap();
-		bool canMove(int posX, int posY, DIRECTION dir);
+		int	 getEncounterRand();
+
 		void reset();
 		std::function<void()> _scripts[16][16];
 
 	private:
-		int _id;
+		int _currentMapID;
 		std::vector<unsigned int> _walls;	
 		std::vector<unsigned int> _passage;
 		std::vector<unsigned int> _regionWalls;

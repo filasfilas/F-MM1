@@ -33,19 +33,20 @@ binary of scripts
 Bytes info (Data section)
 -------------------------------------------------
 51 bytes of maze data:
-0
-1
+
+0	bit-7(outdoor)
+1	section number (1-town or cave, 2-surace, 3-castle)
 2-3	sprite1 ID
 4-5	sprite2 ID
 6-7	sprite3 ID
-8-9
-10
-11-12
-13
-14-15
-16
-17-18
-19
+8-9 north exit mapID
+10  north exit section
+11-12 east exit mapID
+13  east exit section
+14-15 south exit mapID
+16  south exit section
+17-18 weat exit mapID
+19  west exit section
 20
 21
 22
@@ -55,22 +56,22 @@ Bytes info (Data section)
 26
 27
 28
-29
-30
-31
-32
-33
-34
+29	encounter randomizer
+30	word to move forward if a wall-1 (0-solid, 1-locked, 2-too dence, 3-impassable, 4-rough seas, 5-too windy)
+31  word to move forward if a door (see above)
+32  word to move forward if a wall-2 (see above)
+33  max monster level
+34  max monster quantity
 35
 36
 37
 38
 39-40
 41
-42
-43
-44
-45
+42  exit X
+43  exit Y
+44  danger rate for rest
+45  bit-0 (dark map), bot-1 (no teleport)
 46
 47
 48

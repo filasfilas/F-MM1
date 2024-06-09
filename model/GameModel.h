@@ -41,6 +41,7 @@ class GameModel
 		void cellAction();
 		//void update();
 		bool _darkness;
+		bool _encounterFlag;
 		std::vector<std::string> _messageOutbox;
 
 };

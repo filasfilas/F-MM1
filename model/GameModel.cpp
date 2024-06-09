@@ -1,5 +1,6 @@
 #include "GameModel.h"
 #include <iostream>
+#include <ctime>
 
 GameModel::GameModel() 
 : _party()
@@ -11,11 +12,18 @@ GameModel::GameModel()
 	_mapId = 1;
 	_direction = N;
 	_darkness=false;
+
+	std::srand(std::time(nullptr));
 }
 
 void GameModel::setPosition(int X, int Y){
 	_posX = X;
 	_posY = Y;
+
+	_encounterFlag = false;
+	int randSeed = _map.getEncounterRand();
+	_encounterFlag = (std::rand()%randSeed == 1);
+
 	cellAction();
 }
 
@@ -53,15 +61,22 @@ bool GameModel::canMove(DIRECTION dir){
 void GameModel::cellAction() {
 	_messageOutbox.clear();
 	_darkness=false;
+
 	if (_map.isDarkCell(_posX, _posY)) {
 		_darkness = _party.hasLight(true);
 	}
 	if (_map.isDarkMap() && !_party.hasLight(false)) {_darkness = true;}
 
 	if (_map.isSpecial(_posX, _posY)) {
-		_map._scripts[_posX][_posY];
+			addMessage("script here");
+		//_map._scripts[_posX][_posY];
 	}else{
-		//encounter if any
+		if (_encounterFlag){
+			_encounterFlag = false;
+			addMessage("ENCOUNTER!");
+			//encounter code
+			
+		}
 	}
 
 	if (_party.isDead()){
