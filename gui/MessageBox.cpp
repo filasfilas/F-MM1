@@ -31,6 +31,10 @@ void MessageBox::setTextString(sf::String str){
 	if (str != "")	mText.setString(str);
 }
 
+void MessageBox::clean(){
+	mText.setString("");
+}
+
 void MessageBox::draw()
 {
 	//window.draw(mSprite);

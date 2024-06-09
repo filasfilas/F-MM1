@@ -45,6 +45,10 @@ void GUI::update()
 	_msgBox.setTextString(_gData -> mGameModel.getMessage());
 }
 
+void GUI::makeStep(){
+	_msgBox.clean();
+}
+
 void GUI::showCharacterInfo(int id){
 	Character* character = _gData-> mGameModel._party.getCharacter(id);
 	if (character != nullptr){

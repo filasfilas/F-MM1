@@ -12,6 +12,8 @@ class MessageBox
 		void setTextString(sf::String str);
 		void draw();
 
+		void clean();
+
 
 	private:
 		sf::RenderWindow* 	window;

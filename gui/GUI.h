@@ -18,6 +18,8 @@ class GUI
 		void handleInput();
 		void update();
 
+		void makeStep();
+
 
 	private:
 		sf::RenderWindow* 	window;

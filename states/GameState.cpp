@@ -56,6 +56,7 @@ void GameState::update (float dt)
 		if (_movingCounter<=0) {
 			_isTurning = false; 
 			gData -> mGameModel.setDirection (_nextDirection);
+			_gui.makeStep();
 		}
 		return;
 	}
@@ -66,6 +67,7 @@ void GameState::update (float dt)
 		if(_movingCounter<=0){
 			_isMoving = false;
 			gData -> mGameModel.setPosition (_targetX, _targetY);
+			_gui.makeStep();
 		}
 		return;
 	}
