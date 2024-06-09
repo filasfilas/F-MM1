@@ -1,13 +1,13 @@
 #pragma once
 
-#include <cmath>
+//#include <cmath>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics.hpp>
 
 
 template<typename T>
-void centerOrigin(T obj)
+void centerOrigin(T& obj)
 {
 	sf::FloatRect bounds = obj.getLocalBounds();
-	obj.setOrigin(std::floor(bounds.width / 2), std::floor(bounds.height / 2));
+	obj.setOrigin(bounds.width / 2, bounds.height / 2);
 }

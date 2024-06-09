@@ -26,28 +26,30 @@ void MenuState::init() {
 	sf::Sprite sprite;
 	sf::Text text;
 
-	centerOrigin(sprite);
-	//sprite.setOrigin(sprite.getLocalBounds().width / 2.0), sprite.getLocalBounds().height / 2.0);
 	sprite.setTexture(gData -> mAssets.getTexture(Textures::MenuButton));
     sprite.setScale(1.5, 0.8);
+	centerOrigin(sprite);
 
-	centerOrigin(text);
 	text.setFont(gData-> mAssets.getFont(Fonts::Main));
 
 	//create new character
 	text.setString(gData -> mStringsDB.getString(CreateNewCharacter));
+	centerOrigin(text);
 	newCharBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,100));
 
 	//view all character
 	text.setString(gData -> mStringsDB.getString(ViewAllCharacters));
+	centerOrigin(text);
 	viewAllBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,200));
 
 	//go to town
 	text.setString(gData -> mStringsDB.getString(GoToTown));
+	centerOrigin(text);
 	playBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,300));
 
 	//exit button
 	text.setString(gData -> mStringsDB.getString(ExitGame));
+	centerOrigin(text);
 	exitBtn = Button (sprite, text, sf::Vector2f(_screen_width/2,400));
 }
 
