@@ -99,6 +99,16 @@ bool Character::takeItem(int newItem, int charges) {
 	return true;
 }
 
+bool Character::hasItem(int itemID){
+	for (int i=0; i< _equipped.size(); i++){
+		if(_equipped[i] == itemID) return true;
+	}
+	for (int i=0; i< _backpack.size(); i++){
+		if(_backpack[i] == itemID) return true;
+	}
+	return false;
+}
+
 
 void Character::clear() {
 	_name="";

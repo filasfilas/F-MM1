@@ -123,6 +123,7 @@ public:
 	bool takeItem(int newItem, int charges);
 	int giveItem(int itemNumber);
 	void useItem(int itemNumber);
+	bool hasItem(int itemID);
 
 	//gold, food, gems functions
 	int getStock (std::string stockType) const; //stockType:  food, gold, gems

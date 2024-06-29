@@ -65,6 +65,13 @@ bool Party::hasLight(bool _spendLight){
 	return result;
 };
 
+bool Party::hasItem(int itemID){
+	for (int i=0; i<_party.size(); i++){
+		if(_party[i] -> hasItem(itemID)) {	return true; }
+	}
+	return false;
+}
+
 bool Party::isDead(){
 	for (int i=0; i<_party.size(); i++){
 		if(!_party[i] -> isDead()) {
