@@ -6,6 +6,8 @@ GameModel::GameModel()
 : _party()
 , _map()
 {
+    _gameMode = WALK;
+
 	//temporary Sorpigal start
 	_posX = 8;
 	_posY = 3;
