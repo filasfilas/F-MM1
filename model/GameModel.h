@@ -8,9 +8,17 @@
 #include "maps/map.h"
 #include "ModelDefinitions.h"
 
+enum GameMode {
+    WALK,
+    BATTLE,
+    SHOP,
+    NPC      
+};
+
 class GameModel
 {
 	public:
+
 		GameModel();
 
 		Party	_party;
@@ -55,5 +63,5 @@ class GameModel
 		bool _encounterFlag;
 		std::vector<std::string> _messageOutbox;
 		std::vector<std::string> _signalOutbox;
-
+        GameMode _gameMode;
 };
