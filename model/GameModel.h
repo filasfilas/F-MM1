@@ -29,11 +29,12 @@ class GameModel
 
 		void setPosition(int X, int Y);
 		void selectMap(int id);
-		bool canMove(DIRECTION dir);
 		bool canMove(int dirX, int dirY);
 
 		std::string getMessage();
 		void addMessage(std::string msg);
+		std::string getSignal();
+		void addSignal(std::string msg);
 
 		bool equipItem (Character* character, int itemNumber);
 		bool removeItem (Character* character, int itemNumber);
@@ -47,11 +48,13 @@ class GameModel
 		int _mapId;
 
 		void setDirection(DIRECTION dir);
+		bool canMove(DIRECTION dir);
 		void cellAction();
 
 		//void update();
 		bool _darkness;
 		bool _encounterFlag;
 		std::vector<std::string> _messageOutbox;
+		std::vector<std::string> _signalOutbox;
 
 };

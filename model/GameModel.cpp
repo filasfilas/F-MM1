@@ -131,12 +131,25 @@ void GameModel::cellAction() {
 void GameModel::addMessage(std::string msg){
 	_messageOutbox.push_back(msg);
 }
+void GameModel::addSignal(std::string msg){
+	_signalOutbox.push_back(msg);
+}
 
-std::string GameModel::getMessage(){
+std::string GameModel::getMessage() {
 	std::string result = "";
 	if(!_messageOutbox.empty()) {
 		result = _messageOutbox.front();
 		_messageOutbox.erase(_messageOutbox.begin());
+	}
+
+	return result;	
+}
+
+std::string GameModel::getSignal() {
+	std::string result = "";
+	if(!_signalOutbox.empty()) {
+		result = _signalOutbox.front();
+		_signalOutbox.erase(_signalOutbox.begin());
 	}
 
 	return result;	
