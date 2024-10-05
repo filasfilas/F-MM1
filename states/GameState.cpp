@@ -9,6 +9,7 @@ GameState::GameState(GlobalDataRef gData, int townId)
 , _mazeRender(&(gData -> mWindow), gData -> mWindow.getSize().x,  gData -> mWindow.getSize().y)
 , _gui(&(gData -> mWindow), gData)
 {
+	_mode = STANDING;
 	_startTownId = townId-1;	
 	//gData -> mAssets.loadTexture(Textures::MenuButton, "media/images/gui/Button.png");
 
@@ -20,13 +21,14 @@ void GameState::init() {
 ///////////////////
 	gData -> mGameModel.selectMap(_startTownId);
 	_mazeRender.chooseMaze(gData -> mGameModel._map.getWalls());
-	_xPos = (gData -> mGameModel._posX) +0.5;
-	_yPos = (gData -> mGameModel._posY) +0.5;
-	directionToVector(gData -> mGameModel._direction);
+	_xPos = (gData -> mGameModel.getPosX()) +0.5;
+	_yPos = (gData -> mGameModel.getPosY()) +0.5;
+	directionToVector(gData -> mGameModel.getDirection());
 }
 
 void GameState::handleInput(const sf::Event& event)
 {
+	if ((_mode == MOVING)||(_mode == TURNING)) return;
 	if (event.type == sf::Event::KeyPressed)
     {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {turn (1);}
@@ -43,7 +45,7 @@ void GameState::handleInput(const sf::Event& event)
 
 void GameState::update (float dt)
 {
-	if (_isTurning){
+	if (_mode == TURNING){
 
       		float oldDirX = _dirX;
       		_dirX = _dirX * cos(ANGLE_STEP) - _turnDirection*_dirY * sin(ANGLE_STEP);
@@ -54,27 +56,30 @@ void GameState::update (float dt)
 
 		_movingCounter--;
 		if (_movingCounter<=0) {
-			_isTurning = false; 
-			gData -> mGameModel.setDirection (_nextDirection);
+			_mode = STANDING; 
+			if(_turnDirection == -1)	{gData -> mGameModel.turnRight();}
+			else if (_turnDirection == 1)	{gData -> mGameModel.turnLeft();}
 			_gui.makeStep();
 		}
 		return;
 	}
-	if (_isMoving){
-		_xPos = _targetX - (_targetX-(gData -> mGameModel._posX))*MOVE_STEP*_movingCounter +0.5;
-		_yPos = _targetY - (_targetY-(gData -> mGameModel._posY))*MOVE_STEP*_movingCounter +0.5;
+	if (_mode == MOVING){
+		_xPos = _targetX - (_targetX-(gData -> mGameModel.getPosX()))*MOVE_STEP*_movingCounter +0.5;
+		_yPos = _targetY - (_targetY-(gData -> mGameModel.getPosY()))*MOVE_STEP*_movingCounter +0.5;
 		_movingCounter--;
 		if(_movingCounter<=0){
-			_isMoving = false;
+			_mode = STANDING;
+			//if (deltaMove == 1) {gData -> mGameModel.moveForward();}
+			//else if (deltaMove == -1) {gData -> mGameModel.moveBackward();}
 			gData -> mGameModel.setPosition (_targetX, _targetY);
 			_gui.makeStep();
 		}
 		return;
 	}
 
-	_xPos = (gData -> mGameModel._posX) +0.5;
-	_yPos = (gData -> mGameModel._posY) +0.5;
-	directionToVector(gData -> mGameModel._direction);
+	_xPos = (gData -> mGameModel.getPosX()) +0.5;
+	_yPos = (gData -> mGameModel.getPosY()) +0.5;
+	directionToVector(gData -> mGameModel.getDirection());
 
 	_gui.update();
 }
@@ -86,10 +91,10 @@ void GameState::draw(float dt) {
 }
 
 void GameState::turn (int turnDir){
-	if ((_isMoving)||(_isTurning)) return;
+	if (_mode != STANDING) return;
+
 	_turnDirection = turnDir;
-	_isTurning = true;
-	DIRECTION dir = gData -> mGameModel._direction;
+	DIRECTION dir = gData -> mGameModel.getDirection();
 	if (turnDir == 1) {
 		if (dir == N) {_nextDirection = W;}
 		if (dir == W) {_nextDirection = S;}
@@ -103,15 +108,16 @@ void GameState::turn (int turnDir){
 		if (dir == W) {_nextDirection = N;}
 	}
 	_movingCounter = int(90* (M_PI/180)/ANGLE_STEP);
+	_mode = TURNING;
 }
 
 void GameState::move (int deltaMove){
-	if ((_isMoving)||(_isTurning)) return;
+	if (_mode != STANDING) return;
 	if ( !(gData -> mGameModel.canMove(int(_dirX * deltaMove), int(_dirY * deltaMove)))) return;
-	_targetX = gData -> mGameModel._posX + _dirX * deltaMove;
-	_targetY = gData -> mGameModel._posY + _dirY * deltaMove;
+	_targetX = gData -> mGameModel.getPosX() + _dirX * deltaMove;
+	_targetY = gData -> mGameModel.getPosY() + _dirY * deltaMove;
 	_movingCounter = int(1/MOVE_STEP); 
-	_isMoving = true;
+	_mode = MOVING;
 }
 
 void GameState::directionToVector(const DIRECTION dir){

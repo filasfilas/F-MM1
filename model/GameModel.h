@@ -17,20 +17,23 @@ class GameModel
 		Map	_map;
 		Items	_items;
 
+		int getPosX()const {return _posX;}
+		int getPosY()const {return _posY;}
+		DIRECTION getDirection() const {return _direction;}
+		int getMapId()const {return _mapId;}
 
-		int _posX;
-		int _posY;
-		int _mapId;
-		DIRECTION _direction;
+		void turnLeft();
+		void turnRight();
+		bool moveForward();
+		bool moveBackward();
 
 		void setPosition(int X, int Y);
 		void selectMap(int id);
-		void setDirection(DIRECTION dir);
 		bool canMove(DIRECTION dir);
 		bool canMove(int dirX, int dirY);
 
 		std::string getMessage();
-		void		addMessage(std::string msg);
+		void addMessage(std::string msg);
 
 		bool equipItem (Character* character, int itemNumber);
 		bool removeItem (Character* character, int itemNumber);
@@ -38,7 +41,14 @@ class GameModel
 		int dropItem (Character* character, int itemNumber);
 
 	private:	
+		int _posX;
+		int _posY;
+		DIRECTION _direction;
+		int _mapId;
+
+		void setDirection(DIRECTION dir);
 		void cellAction();
+
 		//void update();
 		bool _darkness;
 		bool _encounterFlag;

@@ -36,6 +36,9 @@ class GameState : public State
 		//MessageBox  _msgBox;
 		GUI			_gui;
 
+		enum GameStateMode {STANDING, TURNING, MOVING};
+		GameStateMode	_mode;
+
 		int	_startTownId;
 		float _xPos, _yPos, _dirX, _dirY, _planeX, _planeY;	//vectors for render
 		int _angle; 		//angle for render
@@ -44,8 +47,8 @@ class GameState : public State
 		void turn (int turnDir);
 		void directionToVector(const DIRECTION dir);
 		void move (int deltaMove);
-		bool _isMoving = false;
-		bool _isTurning = false;
+		//bool _isMoving = false;
+		//bool _isTurning = false;
 		int _turnDirection;
 		DIRECTION _nextDirection;
 		int _movingCounter;

@@ -16,6 +16,53 @@ GameModel::GameModel()
 	std::srand(std::time(nullptr));
 }
 
+void GameModel::turnLeft(){
+	DIRECTION newDir;
+	if (_direction == N) newDir = W;
+	if (_direction == W) newDir = S;
+	if (_direction == S) newDir = E;
+	if (_direction == E) newDir = N;
+	setDirection (newDir);
+}
+void GameModel::turnRight(){
+	DIRECTION newDir;
+	if (_direction == N) newDir = E;
+	if (_direction == E) newDir = S;
+	if (_direction == S) newDir = W;
+	if (_direction == W) newDir = N;
+	setDirection (newDir);
+}
+
+void GameModel::setDirection(DIRECTION dir){
+	_direction = dir;
+	cellAction();
+}
+
+bool GameModel::moveForward(){
+	int newX, newY;
+	if (!canMove(_direction)) return false;
+
+	if(_direction == N) newY= _posY+1;
+	if(_direction == S) newY= _posY-1;
+	if(_direction == W) newX= _posX-1;
+	if(_direction == E) newX= _posX-1;
+	setPosition(newX, newY);
+	return true;
+}
+
+bool GameModel::moveBackward(){
+	int newX, newY;
+	DIRECTION newDir;
+	if(_direction == N) {newDir= S; newY= _posY-1;}
+	if(_direction == S) {newDir= N; newY= _posY+1;}
+	if(_direction == W) {newDir= E; newX= _posX-1;}
+	if(_direction == E) {newDir= W; newX= _posX+1;}
+	if (!canMove(newDir)) return false;
+
+	setPosition(newX, newY);
+	return true;
+}
+
 void GameModel::setPosition(int X, int Y){
 	_posX = X;
 	_posY = Y;
@@ -33,10 +80,7 @@ void GameModel::selectMap(int id) {
 	_map.select(id);
 }
 
-void GameModel::setDirection(DIRECTION dir){
-	_direction = dir;
-	cellAction();
-}
+
 
 bool GameModel::canMove (int dirX, int dirY){
 	DIRECTION dir=NO_DIRECTION;
