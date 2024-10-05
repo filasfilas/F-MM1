@@ -1,4 +1,5 @@
 #include "MazeRender.h"
+#include "MapSprite.h"
 #include <cmath>
 #include <iostream>
 
@@ -18,13 +19,34 @@ MazeRender::MazeRender (sf::RenderWindow* target, int viewWidth, int viewHeight)
 :_window (target)
 ,_viewWidth(viewWidth)
 ,_viewHeight(viewHeight)
-{}
-
-void MazeRender::chooseMaze (std::vector<unsigned int> maze){
-	_walls = maze;
+{
     _textures[0].loadFromFile("media/images/walls/wall01.png"); 
     _textures[1].loadFromFile("media/images/walls/wall02.png"); 
     _textures[2].loadFromFile("media/images/walls/wall03.png"); 
+    _textures[3].loadFromFile("media/images/walls/wall04.png"); 
+    _textures[4].loadFromFile("media/images/walls/wall05.png"); 
+    _textures[5].loadFromFile("media/images/walls/wall06.png"); 
+    _textures[6].loadFromFile("media/images/walls/wall07.png"); 
+    _textures[7].loadFromFile("media/images/walls/wall08.png"); 
+    _textures[8].loadFromFile("media/images/walls/wall09.png"); 
+    _textures[9].loadFromFile("media/images/walls/wall10.png"); 
+    _textures[10].loadFromFile("media/images/walls/wall11.png"); 
+    _textures[11].loadFromFile("media/images/walls/wall12.png"); 
+    _textures[12].loadFromFile("media/images/walls/wall13.png"); 
+    _textures[13].loadFromFile("media/images/walls/wall14.png"); 
+    _textures[14].loadFromFile("media/images/walls/wall15.png"); 
+    _textures[15].loadFromFile("media/images/walls/wall16.png"); 
+    _textures[16].loadFromFile("media/images/walls/wall17.png"); 
+    _textures[17].loadFromFile("media/images/walls/wall18.png"); 
+
+}
+
+void MazeRender::chooseMaze (std::vector<unsigned int> maze, int mapId){
+	_walls = maze;
+	_mapId = mapId;
+    _mapTextures[0] = _textures[ mapSpriteData [0][_mapId] -1]; 
+    _mapTextures[1] = _textures[ mapSpriteData [1][_mapId] -1]; 
+    _mapTextures[2] = _textures[ mapSpriteData [2][_mapId] -1]; 
 }
 
 void MazeRender::update(float dt){
@@ -123,8 +145,8 @@ void MazeRender::render (float posX, float posY, float dirX, float dirY, float p
 
 	    	length = int (VIEW_SCALE * _viewHeight / wallDistance);
 
-        	_sprite.setTexture(_textures[wallSpriteId-1]);
-		sf::Vector2u textureSize = _textures[wallSpriteId-1].getSize();
+        	_sprite.setTexture(_mapTextures[wallSpriteId-1]);
+		sf::Vector2u textureSize = _mapTextures[wallSpriteId-1].getSize();
         	_sprite.setTextureRect(sf::IntRect(int(wallSpriteShift*textureSize.x), 0, 1, textureSize.y));
 		_sprite.setOrigin(0,0);
         	_sprite.setPosition(scanLine, _viewHeight/2-length/2);  

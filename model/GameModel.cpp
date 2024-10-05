@@ -9,7 +9,7 @@ GameModel::GameModel()
 	//temporary Sorpigal start
 	_posX = 8;
 	_posY = 3;
-	_mapId = 1;
+	//_mapId = 1;
 	_direction = N;
 	_darkness=false;
 
@@ -66,6 +66,23 @@ bool GameModel::moveBackward(){
 void GameModel::setPosition(int X, int Y){
 	_posX = X;
 	_posY = Y;
+	if (_posX < 0){
+		_posX=15;
+		_map.goNextMap (W);
+	}
+	else if (_posX > 15){
+		_posX=0;
+		_map.goNextMap (E);
+	}
+	else if (_posY < 0){
+		_posY=15;
+		_map.goNextMap (S);
+	}
+	else if (_posY > 15){
+		_posY=0;
+		_map.goNextMap (N);
+	}
+
 
 	_encounterFlag = false;
 	int randSeed = _map.getEncounterRand();
@@ -76,7 +93,6 @@ void GameModel::setPosition(int X, int Y){
 
 void GameModel::selectMap(int id) {
 	if ((id<0)&&(id>54)) return;
-	_mapId = id;
 	_map.select(id);
 }
 
@@ -103,6 +119,7 @@ bool GameModel::canMove(DIRECTION dir){
 }
 
 void GameModel::cellAction() {
+std::cout<<_posX<<"   " <<_posY<<"   " <<_direction<<"   "<<getMapId()<<std::endl;
 	_messageOutbox.clear();
 	_darkness=false;
 

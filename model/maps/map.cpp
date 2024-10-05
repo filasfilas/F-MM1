@@ -6,7 +6,7 @@
 
 
 Map::Map(){
-	//_currentMapID =0;
+	//_currentMapId =51;
 
 	const char* sourceFileName="MAZEDATA.DTA";
 	unsigned char ch=0;	
@@ -31,7 +31,7 @@ Map::Map(){
 }
 
 void Map::select(int id){
-    _currentMapID = id;
+    _currentMapId = id;
 	_regionWalls.clear();
 	for (int i=0; i<256; i++) {
 		_regionWalls.push_back(_walls[256*id + i]);
@@ -53,9 +53,9 @@ std::string Map::getPassage(int posX, int posY, DIRECTION dir){
 		else{result = "barrier";}	//no wall, no passage
 	}else{
 	//a wall
-		resultType = _mapdata[_currentMapID][32]; //wall, type2
-		if(!((_walls[getOffset(posX, posY)] & 0x55)&dir)){resultType = _mapdata[_currentMapID][31];} //wall, type1
-		else if(!((_walls[getOffset(posX, posY)] & 0xaa)&dir)){resultType = _mapdata[_currentMapID][30];} //wall, type0
+		resultType = _mapdata[_currentMapId][32]; //wall, type2
+		if(!((_walls[getOffset(posX, posY)] & 0x55)&dir)){resultType = _mapdata[_currentMapId][31];} //wall, type1
+		else if(!((_walls[getOffset(posX, posY)] & 0xaa)&dir)){resultType = _mapdata[_currentMapId][30];} //wall, type0
 
 
 		//a wall and no passage
@@ -92,7 +92,7 @@ bool Map::isSpecial(int posX, int posY) {
 }
 
 int	 Map::getEncounterRand(){
-	return _mapdata[_currentMapID][29];
+	return _mapdata[_currentMapId][29];
 }
 
 void Map::clearSpecial(int posX, int posY) {
@@ -100,11 +100,21 @@ void Map::clearSpecial(int posX, int posY) {
 }
 
 int Map::getOffset(int posX, int posY) {
-	return _currentMapID*256+16*posY+posX;
+	return _currentMapId*256+16*posY+posX;
 }
 
 bool Map::isDarkMap(){
-	return _mapdata[_currentMapID][46]&0x1;
+	return _mapdata[_currentMapId][46]&0x1;
+}
+
+void Map::goNextMap (DIRECTION dir) {
+	if (_currentMapId <36) return;
+	int tmp;
+	if (dir == N) tmp=0;
+	if (dir == E) tmp=1;
+	if (dir == S) tmp=2;
+	if (dir == W) tmp=3;
+	select((_nextMapId [tmp] [_currentMapId - 36]) -1);
 }
 
 

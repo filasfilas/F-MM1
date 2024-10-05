@@ -12,6 +12,8 @@ class Map
 		void select (int id);
 		std::vector<unsigned int> getWalls() const;
 		std::string getPassage(int posX, int posY, DIRECTION dir);
+		int getCurrentId () const {return _currentMapId;};
+		void goNextMap (DIRECTION dir);
 
 		bool isNonMagic(int posX, int posY);
 		bool isDangerous(int posX, int posY);
@@ -25,7 +27,7 @@ class Map
 		std::function<void()> _scripts[16][16];
 
 	private:
-		int _currentMapID;
+		int _currentMapId;
 		std::vector<unsigned int> _walls;	
 		std::vector<unsigned int> _passage;
 		std::vector<unsigned int> _regionWalls;

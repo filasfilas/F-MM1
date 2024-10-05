@@ -20,7 +20,7 @@ class GameModel
 		int getPosX()const {return _posX;}
 		int getPosY()const {return _posY;}
 		DIRECTION getDirection() const {return _direction;}
-		int getMapId()const {return _mapId;}
+		int getMapId()const {return _map.getCurrentId();}
 
 		void turnLeft();
 		void turnRight();
@@ -45,7 +45,6 @@ class GameModel
 		int _posX;
 		int _posY;
 		DIRECTION _direction;
-		int _mapId;
 
 		void setDirection(DIRECTION dir);
 		bool canMove(DIRECTION dir);

@@ -20,7 +20,7 @@ GameState::GameState(GlobalDataRef gData, int townId)
 void GameState::init() {
 ///////////////////
 	gData -> mGameModel.selectMap(_startTownId);
-	_mazeRender.chooseMaze(gData -> mGameModel._map.getWalls());
+	_mazeRender.chooseMaze(gData -> mGameModel._map.getWalls(), _startTownId);
 	_xPos = (gData -> mGameModel.getPosX()) +0.5;
 	_yPos = (gData -> mGameModel.getPosY()) +0.5;
 	directionToVector(gData -> mGameModel.getDirection());
@@ -72,6 +72,7 @@ void GameState::update (float dt)
 			//if (deltaMove == 1) {gData -> mGameModel.moveForward();}
 			//else if (deltaMove == -1) {gData -> mGameModel.moveBackward();}
 			gData -> mGameModel.setPosition (_targetX, _targetY);
+			_mazeRender.chooseMaze(gData -> mGameModel._map.getWalls(), gData -> mGameModel.getMapId());
 			_gui.makeStep();
 		}
 		return;

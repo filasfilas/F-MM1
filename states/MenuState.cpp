@@ -77,6 +77,10 @@ void MenuState::handleInput(const sf::Event& event)
 		if ((event.key.code >= sf::Keyboard::Num1)&&(event.key.code <= sf::Keyboard::Num5)){
 			gData -> mStates.replaceState(StatePtr(new GameState(gData, (event.key.code-26) )));
 		}
+		//temporary for test
+		else if ((event.key.code == sf::Keyboard::Num9)){
+			gData -> mStates.replaceState(StatePtr(new GameState(gData, 39 )));
+		}
 	}
 
 }
