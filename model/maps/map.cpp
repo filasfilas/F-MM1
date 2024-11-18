@@ -107,14 +107,15 @@ bool Map::isDarkMap(){
 	return _mapdata[_currentMapId][46]&0x1;
 }
 
-void Map::goNextMap (DIRECTION dir) {
-	if (_currentMapId <36) return;
+void Map::goNextMap (DIRECTION dir) {	//for regions A1-E4 only
+	if (_currentMapId <14) return;
+	if (_currentMapId >33) return;
 	int tmp;
 	if (dir == N) tmp=0;
 	if (dir == E) tmp=1;
 	if (dir == S) tmp=2;
 	if (dir == W) tmp=3;
-	select((_nextMapId [tmp] [_currentMapId - 36]) -1);
+	select((_nextMapId [tmp] [_currentMapId - 14]));
 }
 
 
