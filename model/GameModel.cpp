@@ -121,7 +121,7 @@ bool GameModel::canMove(DIRECTION dir){
 }
 
 void GameModel::cellAction() {
-std::cout<<_posX<<"   " <<_posY<<"   " <<_direction<<"   "<<getMapId()<<std::endl;
+//std::cout<<_posX<<"   " <<_posY<<"   " <<_direction<<"   "<<getMapId()<<std::endl;
 	_messageOutbox.clear();
 	_darkness=false;
 
