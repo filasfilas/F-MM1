@@ -1,10 +1,11 @@
 #include "maze23.h"
+#include "../GameModel.h"
 
-
-Maze23::Maze23(){
+Maze23::Maze23(GameModel* gm){
 	_ovrName = "areaC2";
 	_description = "area C2";
 	_scriptsCount = 14;
+    _pGameModel = gm;
 
 }
 
@@ -34,35 +35,49 @@ void Maze23::launchScript(int posX, int posY, DIRECTION dir){
         case 11: fountain(); break;
         case 12: avalanche(); break;
         case 13: chest(); break;
-        default: break; // to do encounter
+        default: encounter(); break;
     }
 
 }
 
 
 void Maze23::entranceSorpigal(){
+    _pGameModel -> addMessage("SORPIGAL");
 }
 
 void Maze23::gypsy(){
+    _pGameModel -> addMessage("gipsy");
 }
 
 void Maze23::pit(){
+    _pGameModel -> addMessage("pit");
 }
 
 void Maze23::teleport(){
+    _pGameModel -> addMessage("teleport");
 }
 
 void Maze23::statue(){
+    _pGameModel -> addMessage("Statue");
 }
 
 void Maze23::fountain(){
+    _pGameModel -> addMessage("fountain");
 }
 
 void Maze23::avalanche(){
+    _pGameModel -> addMessage("avalanche");
 }
 
 void Maze23::entranceCrazeWizardCave(){
+    _pGameModel -> addMessage("CrazeWizardCave");
 }
 
 void Maze23::chest(){
+    _pGameModel -> addMessage("chest");
+}
+
+ // to do encounter
+void Maze23::encounter(){
+    _pGameModel -> addMessage("ENCOUNTER !!!");
 }

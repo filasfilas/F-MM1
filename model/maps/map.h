@@ -6,10 +6,13 @@
 #include "../ModelDefinitions.h"
 #include "mazelist.h"
 
+class GameModel;
+
 class Map
 {
 	public:
 		Map();
+        void init (GameModel* gm);
 		void select (int id);
 		std::vector<unsigned int> getWalls() const;
 		std::string getPassage(int posX, int posY, DIRECTION dir);
@@ -24,8 +27,10 @@ class Map
 		bool isDarkMap();
 		int	 getEncounterRand();
 
+        void doScript(int posX, int posY, DIRECTION dir);
+
 		void reset();
-		std::function<void()> _scripts[16][16];
+
 
 	private:
 		int _currentMapId;

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
+//#include "../GameModel.h"
 #include "../ModelDefinitions.h"
+class GameModel;
 
 class Maze
 {

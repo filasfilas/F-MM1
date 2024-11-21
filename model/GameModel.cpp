@@ -6,6 +6,7 @@ GameModel::GameModel()
 : _party()
 , _map()
 {
+    _map.init(this);
     _gameMode = WALK;
 
 	//temporary Sorpigal start
@@ -132,7 +133,7 @@ void GameModel::cellAction() {
 
 	if (_map.isSpecial(_posX, _posY)) {
 			addMessage("script here");
-		//_map._scripts[_posX][_posY];
+		    _map.doScript(_posX, _posY, _direction);
 	}else{
 		if (_encounterFlag){
 			_encounterFlag = false;

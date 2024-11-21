@@ -17,6 +17,7 @@ enum GameMode {
 
 class GameModel
 {
+
 	public:
 
 		GameModel();

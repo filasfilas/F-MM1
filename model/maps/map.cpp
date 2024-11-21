@@ -28,9 +28,11 @@ Map::Map(){
 		}
 	}
 	inf.close();
+}
 
+void Map::init (GameModel* gm){
 //to do load mazes
-	_mazelist.push_back(new Maze00());
+	_mazelist.push_back(new Maze00(gm));
 /*
 	_mazelist.push_back(new Maze01());
 	_mazelist.push_back(new Maze02());
@@ -43,6 +45,7 @@ Map::Map(){
 	_mazelist.push_back(new Maze09());
 	_mazelist.push_back(new Maze10());
 */
+	_mazelist.push_back(new Maze23(gm));
 }
 
 void Map::select(int id){
@@ -56,7 +59,8 @@ void Map::select(int id){
 		_regionPassage.push_back(_passage[256*id + i]);
 	}
 
-	_currentMaze = _mazelist[id];
+	//_currentMaze = _mazelist[id];
+	_currentMaze = _mazelist[1];
 }
 
 std::vector<unsigned int> Map::getWalls() const{
@@ -136,4 +140,8 @@ void Map::goNextMap (DIRECTION dir) {	//for regions A1-E4 only
 	if (dir == S) tmp=2;
 	if (dir == W) tmp=3;
 	select((_nextMapId [tmp] [_currentMapId - 14]));
+}
+
+void Map::doScript(int posX, int posY, DIRECTION dir){
+    _currentMaze -> launchScript(posX, posY, dir);
 }

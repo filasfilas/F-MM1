@@ -1,8 +1,8 @@
 #include "maze00.h"
+#include "../GameModel.h"
 
 
-
-Maze00::Maze00(){
+Maze00::Maze00(GameModel* gm){
 	_ovrName = "Sorpigal";
 	_description = "Sorpigal";
 	_scriptsCount = 14;
