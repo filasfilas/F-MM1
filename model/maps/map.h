@@ -4,6 +4,7 @@
 #include <string>
 #include <functional>
 #include "../ModelDefinitions.h"
+#include "mazelist.h"
 
 class Map
 {
@@ -28,11 +29,12 @@ class Map
 
 	private:
 		int _currentMapId;
+		Maze* _currentMaze;
 		std::vector<unsigned int> _walls;	
 		std::vector<unsigned int> _passage;
 		std::vector<unsigned int> _regionWalls;
-		unsigned int _constEncounters[16][16];
+		std::vector<unsigned int> _regionPassage;
+		std::vector<Maze*> _mazelist;
 
-		void loadScripts();
 		int getOffset (int posX, int posY);
 };

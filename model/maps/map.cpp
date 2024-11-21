@@ -1,6 +1,6 @@
 #include "map.h"
 #include "mapdata.h"
-//#include "maze00.h"
+
 #include <fstream>
 #include <iostream>
 
@@ -28,6 +28,21 @@ Map::Map(){
 		}
 	}
 	inf.close();
+
+//to do load mazes
+	_mazelist.push_back(new Maze00());
+/*
+	_mazelist.push_back(new Maze01());
+	_mazelist.push_back(new Maze02());
+	_mazelist.push_back(new Maze03());
+	_mazelist.push_back(new Maze04());
+	_mazelist.push_back(new Maze05());
+	_mazelist.push_back(new Maze06());
+	_mazelist.push_back(new Maze07());
+	_mazelist.push_back(new Maze08());
+	_mazelist.push_back(new Maze09());
+	_mazelist.push_back(new Maze10());
+*/
 }
 
 void Map::select(int id){
@@ -36,14 +51,19 @@ void Map::select(int id){
 	for (int i=0; i<256; i++) {
 		_regionWalls.push_back(_walls[256*id + i]);
 	}
+	_regionPassage.clear();
+	for (int i=0; i<256; i++) {
+		_regionPassage.push_back(_passage[256*id + i]);
+	}
 
-	loadScripts();
+	_currentMaze = _mazelist[id];
 }
 
 std::vector<unsigned int> Map::getWalls() const{
 	return _regionWalls;
 }
 
+//to do: rebuild for regionPassage
 std::string Map::getPassage(int posX, int posY, DIRECTION dir){
 	std::string result="";
 	int resultType = -1;
@@ -88,7 +108,7 @@ bool Map::isDarkCell(int posX, int posY) {
 	return (_passage[getOffset(posX, posY)] & 0x20) != 0;
 }
 bool Map::isSpecial(int posX, int posY) {
-	return (_passage[getOffset(posX, posY)] & 0x80) != 0;
+	return (_regionPassage[16*posY+posX] & 0x80) != 0;
 }
 
 int	 Map::getEncounterRand(){
@@ -96,7 +116,7 @@ int	 Map::getEncounterRand(){
 }
 
 void Map::clearSpecial(int posX, int posY) {
-	_passage[getOffset(posX, posY)] &= 0x7f;
+	_regionPassage[16*posY+posX] &= 0x7f;
 }
 
 int Map::getOffset(int posX, int posY) {
@@ -116,22 +136,4 @@ void Map::goNextMap (DIRECTION dir) {	//for regions A1-E4 only
 	if (dir == S) tmp=2;
 	if (dir == W) tmp=3;
 	select((_nextMapId [tmp] [_currentMapId - 14]));
-}
-
-
-//to do
-void Map::loadScripts() {
-	for(int y=0; y<16; y++){
-		for(int x=0; x<16; x++){
-			if (isSpecial(x,y)) {
-
-			} 
-			else {
-				_scripts[x][y] = nullptr;
-				_constEncounters[x][y] = 0;
-			}
-		}
-	}
-	//_scripts[12][0] = Maze00::_scripts [4];
-
 }
