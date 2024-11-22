@@ -15,12 +15,16 @@ void Maze23::launchScript(int posX, int posY, DIRECTION dir){
 	int scriptNumber = -1;
 	for (int i =0; i< _scriptsCount; i++){
 		if (position == _scriptXY[i]){
-			if (dir & _scriptDirection[i]) {
-				scriptNumber = i;
-			}
+			scriptNumber = i;
 		}
 	}
+	
+	if ((scriptNumber > -1)&&(!(dir & _scriptDirection[scriptNumber]))){
+		scriptNumber = -99;
+	} 
+
     switch (scriptNumber){
+	case -1: encounter(); break;
         case 0: entranceSorpigal(); break;
         case 1: entranceCrazeWizardCave(); break;
         case 2: gypsy(); break;
@@ -35,7 +39,7 @@ void Maze23::launchScript(int posX, int posY, DIRECTION dir){
         case 11: fountain(); break;
         case 12: avalanche(); break;
         case 13: chest(); break;
-        default: encounter(); break;
+        default: break;
     }
 
 }

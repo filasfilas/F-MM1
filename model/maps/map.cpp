@@ -33,19 +33,60 @@ Map::Map(){
 void Map::init (GameModel* gm){
 //to do load mazes
 	_mazelist.push_back(new Maze00(gm));
-/*
-	_mazelist.push_back(new Maze01());
-	_mazelist.push_back(new Maze02());
-	_mazelist.push_back(new Maze03());
-	_mazelist.push_back(new Maze04());
-	_mazelist.push_back(new Maze05());
-	_mazelist.push_back(new Maze06());
-	_mazelist.push_back(new Maze07());
-	_mazelist.push_back(new Maze08());
-	_mazelist.push_back(new Maze09());
-	_mazelist.push_back(new Maze10());
-*/
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze01(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze02(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze03(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze04(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze05(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze06(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze07(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze08(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze09(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze10(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze11(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze12(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze13(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze14(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze15(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze16(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze17(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze18(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze19(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze20(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze21(gm));
+	_mazelist.push_back(new Maze22(gm));
 	_mazelist.push_back(new Maze23(gm));
+	_mazelist.push_back(new Maze24(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze25(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze26(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze27(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze28(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze29(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze30(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze31(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze32(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze33(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze34(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze35(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze36(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze37(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze38(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze39(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze40(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze41(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze42(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze43(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze44(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze45(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze46(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze47(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze48(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze49(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze50(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze51(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze52(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze53(gm));
+	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze54(gm));
 }
 
 void Map::select(int id){
@@ -59,8 +100,7 @@ void Map::select(int id){
 		_regionPassage.push_back(_passage[256*id + i]);
 	}
 
-	//_currentMaze = _mazelist[id];
-	_currentMaze = _mazelist[1];
+	_currentMaze = _mazelist[id];
 }
 
 std::vector<unsigned int> Map::getWalls() const{
@@ -143,5 +183,7 @@ void Map::goNextMap (DIRECTION dir) {	//for regions A1-E4 only
 }
 
 void Map::doScript(int posX, int posY, DIRECTION dir){
-    _currentMaze -> launchScript(posX, posY, dir);
+	if (_currentMaze != nullptr){
+    		_currentMaze -> launchScript(posX, posY, dir);
+	}
 }
