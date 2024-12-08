@@ -80,3 +80,14 @@ bool Party::isDead(){
 	}
 	return true;
 };
+
+void Party::rest(){
+	//clean buffs
+	for (int i=0; i++; i<(PARTY_PROTECTION_COUNT-1) ) {
+		_protections[i]=0;
+	}
+	//character rest
+	for (int i=0; i++; i< PARTY_SIZE) {
+		_party[i] -> rest();
+	}
+}

@@ -31,13 +31,18 @@ void GameState::handleInput(const sf::Event& event)
 	if ((_mode == MOVING)||(_mode == TURNING)) return;
 	if (event.type == sf::Event::KeyPressed)
     {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {turn (1);}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){turn (-1);}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { move(1);}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { move(-1);}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {turn (1); return;}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){turn (-1); return;}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { move(1); return;}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { move(-1); return;}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) { 
 			gData -> mStates.addState(StatePtr (new QuickRefState(gData)));
+			return;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) { 
+			gData -> mGameModel.rest();
+			return;
 		}
 	}
 	_gui.handleInput();

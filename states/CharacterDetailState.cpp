@@ -164,7 +164,7 @@ void CharacterDetailState::charDataUpdate (){
 	_txtLabel[15].setString ("SP = " + std::to_string(_character->_SP._temporary) + " / " + std::to_string(_character->_SP._permanent));	
 	_txtLabel[16].setString ("HP = " + std::to_string(_character->_HP._temporary) + " / " + std::to_string(_character->_HP._permanent));	
 	_txtLabel[17].setString ("AC = " + std::to_string(_character->_AC._temporary));	
-	_txtLabel[18].setString ("Age = " + std::to_string(_character->_age._permanent));
+	_txtLabel[18].setString ("Age = " + std::to_string(_character->_ageYears));
 	_txtLabel[19].setString ("Experience = " + std::to_string(_character->_experience));	
 	_txtLabel[20].setString ("Gems = " + std::to_string(_character->_gems));
 	_txtLabel[21].setString ("Gold = " + std::to_string(_character->_gold));

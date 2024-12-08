@@ -33,9 +33,9 @@ enum SpellsCategory {
 
 enum Condition {
 	GOOD = 0, 
-	ASLEEP = 1, BLINDED =2, SILENCED = 3, DISEASED = 4,  
-	POISONED = 5, PARALYZED = 6, UNCONSCIOUS = 7,
-	DEAD = 8, STONED = 9, ERADICATED = 10
+	ASLEEP = 1, BLINDED =2, SILENCED = 4, DISEASED = 8,  
+	POISONED = 0x10, PARALYZED = 0x20, UNCONSCIOUS = 0x40,
+	DEAD = 0xc, STONED = 0xa, ERADICATED = 0xff
 };
 
 class AttributePair {
@@ -63,7 +63,9 @@ public:
 	AttributePair _accuracy;
 	AttributePair _luck;	
 	AttributePair _level;
-	AttributePair _age;
+	
+	int _ageYears;
+	int _ageDays;
 
 	AttributePair _magicResistence;
 	AttributePair _fireResistence;
@@ -73,7 +75,7 @@ public:
 	AttributePair _fearResistence;
 	AttributePair _poisonResistence;
 	AttributePair _sleepResistence;
-	AttributePair _energyResistence;
+	//AttributePair _energyResistence;
 
 	AttributePair _AC;
 	AttributePair _spellLevel;
@@ -99,6 +101,7 @@ public:
 //methods
 	Character();
 	void clear();
+	void rest();
 
 	//getters
 	Condition getWorstCondition() const;
@@ -135,4 +138,9 @@ private:
 	//modifier for attribute depends on conditions
 	int conditionModifier(Attribute attribute) const;
 	void applyEquipBonus(int bonusID, int bonusValue);
+
+	void resetParameters();
+	void resetResist();
+	void resetSP();
+	void resetAC();
 };

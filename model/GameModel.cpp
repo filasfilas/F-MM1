@@ -247,3 +247,13 @@ bool GameModel::transferItem (Character* sender, Character* receiver, int itemNu
 	receiver -> takeItem(sender -> dropItem(itemNumber), charges);
 	return true;
 }
+
+void GameModel::rest(){
+	if (_map.isDangerous(_posX, _posY)){
+		addMessage("Too dangerous to rest here");
+		return;
+	}
+
+	_party.rest();
+	addMessage("Rest complete. No encounters");
+}

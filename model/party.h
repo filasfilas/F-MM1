@@ -29,6 +29,7 @@ class Party
 		bool hasLight(bool _spendLight);
 		bool hasItem(int itemID);
 		bool isDead();
+		void rest();
 		
 		Roster	_roster;
 

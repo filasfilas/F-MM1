@@ -36,6 +36,8 @@ class GameModel
 		bool moveForward();
 		bool moveBackward();
 
+		void rest();
+
 		void setPosition(int X, int Y);
 		void selectMap(int id);
 		bool canMove(int dirX, int dirY);
