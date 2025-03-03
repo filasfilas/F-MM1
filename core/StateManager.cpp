@@ -43,7 +43,7 @@ void StateManager::processStateChange (){
     if (_mAction == REPLACE)    {
         if (!_mStateStack.empty()) {
 			_mStateStack.back() -> stop();
-            		_mStateStack.pop_back();
+            _mStateStack.pop_back();
 		}
             
         _mStateStack.push_back(std::move(_newState));
@@ -53,7 +53,7 @@ void StateManager::processStateChange (){
     if (_mAction == REPLACEALL)    {
         while (!_mStateStack.empty()) {
 			_mStateStack.back() -> stop();
-            		_mStateStack.pop_back();
+            _mStateStack.pop_back();
 		}
             
         _mStateStack.push_back(std::move(_newState));
@@ -91,5 +91,12 @@ void StateManager::handleInput(sf::Event& event) {
 
 bool StateManager::isEmpty() {
     return _mStateStack.empty();
+}
+
+void StateManager::stop() {
+    while (!_mStateStack.empty()) {
+		_mStateStack.back() -> stop();
+       	_mStateStack.pop_back();
+	}
 }
 

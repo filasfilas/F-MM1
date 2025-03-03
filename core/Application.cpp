@@ -67,5 +67,6 @@ void Application::loadResources(){
 
 void Application::stop(){
     gData -> mMusic.stop();
+	gData -> mStates.stop(); 
 	gData -> mWindow.close();
 }
