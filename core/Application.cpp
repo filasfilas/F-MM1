@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "../states/TitleState.h"
 #include "../Definitions.h"
+//#include<iostream>
 
 
 Application::Application(){
@@ -9,7 +10,6 @@ Application::Application(){
     loadResources();
     gData -> mStates.addState(StatePtr(new TitleState (gData))); //push TitleState in stack
     gData -> mStates.processStateChange();
-    isRunning = true;
 }
 
 
@@ -18,13 +18,13 @@ void Application::run(){
 	float timeSinceLastUpdate = 0; 
 	bool repaint = false;
 
-	while ( !(gData -> mStates.isEmpty()) && (isRunning) ) 	{         
+	while ( !(gData -> mStates.isEmpty()) && (gData -> mWindow.isOpen()) ) 	{         
 			timeSinceLastUpdate += (clock.restart()).asSeconds(); 
 			while (timeSinceLastUpdate > TimePerFrame) { 
 				timeSinceLastUpdate -= TimePerFrame; 
 				repaint = true; 
-		        processInput();
-		        update(TimePerFrame); 
+		        	processInput();
+		        	update(TimePerFrame); 
 			} 
 			if(repaint) {
 				render(TimePerFrame); 
@@ -33,7 +33,6 @@ void Application::run(){
 
 			gData -> mStates.processStateChange();
 	}
-    stop();
 }
 
 
@@ -42,7 +41,7 @@ void Application::processInput(){
 
 	while (gData -> mWindow.pollEvent(event)) {
  		if (event.type == sf::Event::Closed) {
-            isRunning = false;
+			gData -> mWindow.close();
 		}
         	//pass event into StateStack
         	gData -> mStates.handleInput(event);
@@ -63,10 +62,4 @@ void Application::update(float dt){
 void Application::loadResources(){
 	gData -> mStringsDB.setLanguage();
 	gData -> mAssets.loadFont(Fonts::Main, "media/fonts/Square.ttf");
-}
-
-void Application::stop(){
-    gData -> mMusic.stop();
-	gData -> mStates.stop(); 
-	gData -> mWindow.close();
 }

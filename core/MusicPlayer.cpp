@@ -2,9 +2,9 @@
 
 
 MusicPlayer::MusicPlayer()
-: _mMusic()
+: _music()
 , _mFiles()
-, _mVolume (100.f)
+, _volume (100.f)
 {
     _mFiles[Music::MainTheme] = "media/music/MM1-main.ogg";
     _mFiles[Music::TownTheme] = "media/music/MM1-town.ogg";
@@ -13,25 +13,26 @@ MusicPlayer::MusicPlayer()
 
 void MusicPlayer::play(Music::ID theme){
     std::string filename = _mFiles[theme];
-    if (!_mMusic.openFromFile(filename)) {
+    if (!_music.openFromFile(filename)) {
         throw std::runtime_error("Music " + filename + " could not be loaded.");
     }
-    _mMusic.setVolume(_mVolume);
-    _mMusic.setLoop(true);
-    _mMusic.play();
+    _music.setVolume(_volume);
+    _music.setLoop(true);
+    _music.play();
 }
 
 void MusicPlayer::stop(){
-    _mMusic.stop();
+    _music.stop();
 }
 
 void MusicPlayer::setPaused(bool paused){
-    if (paused) {_mMusic.pause();}
-    else {_mMusic.play();}
+    if (paused) {_music.pause();}
+    else {_music.play();}
 }
 
 void MusicPlayer::setVolume(float volume){
-    if (volume <0) volume =0.0;
-    if (volume > 100.0) volume =100.0;
-    _mMusic.setVolume (volume);
+    _volume = volume;
+    if (_volume <0) _volume =0.0;
+    if (_volume > 100.0) _volume =100.0;
+    _music.setVolume (_volume);
 }

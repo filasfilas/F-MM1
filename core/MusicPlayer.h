@@ -16,7 +16,7 @@ class MusicPlayer
         void setVolume(float volume);
     
     private:
-        sf::Music   _mMusic;
-        float       _mVolume;
+        sf::Music   _music;
+        float       _volume;
         std::map <Music::ID, std::string> _mFiles;
 };
