@@ -12,7 +12,7 @@ class State
         virtual void update (float dt) = 0;
         virtual void draw(float dt ) = 0;
 
-	virtual void pause() { }
-	virtual void resume() { }
-	virtual void stop() { }
+	    virtual void pause() { }
+	    virtual void resume() { }
+	    virtual void stop() { }
 };
