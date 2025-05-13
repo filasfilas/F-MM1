@@ -1,12 +1,12 @@
 #pragma once
 
 #include "maze00.h"
-/*
 #include "maze01.h"
 #include "maze02.h"
 #include "maze03.h"
 #include "maze04.h"
 #include "maze05.h"
+/*
 #include "maze06.h"
 #include "maze07.h"
 #include "maze08.h"

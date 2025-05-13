@@ -6,10 +6,11 @@ Maze00::Maze00(GameModel* gm){
 	_ovrName = "Sorpigal";
 	_description = "Sorpigal";
 	_scriptsCount = 24;
-    	_pGameModel = gm;
+    _pGameModel = gm;
 }
 
 void Maze00::launchScript(int posX, int posY, DIRECTION dir){
+
 	//search for script number
 	int position = posX + 16*posY;
 	int scriptNumber = -1;
@@ -23,6 +24,7 @@ void Maze00::launchScript(int posX, int posY, DIRECTION dir){
 		scriptNumber = -99;
 	} 
 
+    //int scriptNumber = getScriptNumber(int posX, int posY, DIRECTION dir);
     switch (scriptNumber){
 	case -1: encounter(); break;
         case 0: inn(); break;
@@ -95,6 +97,8 @@ void Maze00::doorSign(int id){
 
 void Maze00::exitC2(){
     _pGameModel -> addMessage("Exit to C2");
+    _pGameModel -> selectMap(23);
+    _pGameModel -> setPosition(10, 10);
 }
 
 void Maze00::leprechaun(){
@@ -103,6 +107,8 @@ void Maze00::leprechaun(){
 
 void Maze00::downstairs(){
     _pGameModel -> addMessage("Downstairs");
+    _pGameModel -> selectMap(5);
+    _pGameModel -> setPosition(14, 0);
 }
 
 void Maze00::statue(int statueNum){

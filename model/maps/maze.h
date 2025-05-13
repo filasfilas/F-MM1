@@ -13,6 +13,6 @@ class Maze
 		std:: string _ovrName;
 		std:: string _description;
 		int	_scriptsCount;
-	private:
-
+	protected:
+		//int getScriptNumber (int posX, int posY, DIRECTION dir); 
 };

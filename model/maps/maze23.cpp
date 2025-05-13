@@ -47,6 +47,8 @@ void Maze23::launchScript(int posX, int posY, DIRECTION dir){
 
 void Maze23::entranceSorpigal(){
     _pGameModel -> addMessage("SORPIGAL");
+    _pGameModel -> selectMap(0);
+    _pGameModel -> setPosition(12, 0);
 }
 
 void Maze23::gypsy(){
