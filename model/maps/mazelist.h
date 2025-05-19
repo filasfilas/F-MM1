@@ -6,10 +6,10 @@
 #include "maze03.h"
 #include "maze04.h"
 #include "maze05.h"
-/*
 #include "maze06.h"
 #include "maze07.h"
 #include "maze08.h"
+/*
 #include "maze09.h"
 #include "maze10.h"
 #include "maze11.h"

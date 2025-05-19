@@ -56,18 +56,18 @@ Bytes info
 6d
 6e
 6f
-70	location town inn??
-71
-72
-73
-74
-75
-76
-77
+70	quest flags-0
+71	quest flags-1
+72	quest flags-2
+73	quest flags-3
+74	quest flags-4
+75	quest flags-5
+76	quest flags-6
+77	quest flags-7
 78
 79
 7a
-7b
+7b	visit flags
 7c
 7d
 7e	id number in roster file
