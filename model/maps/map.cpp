@@ -46,11 +46,11 @@ void Map::init (GameModel* gm){
 	_mazelist.push_back(new Maze11(gm));
 	_mazelist.push_back(new Maze12(gm));
 	_mazelist.push_back(new Maze13(gm));
-	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze14(gm));
-	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze15(gm));
-	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze16(gm));
-	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze17(gm));
-	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze18(gm));
+	_mazelist.push_back(new Maze14(gm));
+	_mazelist.push_back(new Maze15(gm));
+	_mazelist.push_back(new Maze16(gm));
+	_mazelist.push_back(new Maze17(gm));
+	_mazelist.push_back(new Maze18(gm));
 	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze19(gm));
 	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze20(gm));
 	_mazelist.push_back(nullptr); //	_mazelist.push_back(new Maze21(gm));
