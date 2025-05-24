@@ -19,7 +19,7 @@ MessageBox::MessageBox(sf::RenderWindow* target, int viewWidth, int viewHeight)
 	mShape.setOutlineThickness(2);
 
 	mText.setPosition(viewWidth/2.0 ,mShape.getPosition().y);
-	//centerOrigin(mText);
+	centerOrigin(mText);
 
 }
 
@@ -29,6 +29,7 @@ void MessageBox::setFont(sf::Font* font){
 
 void MessageBox::setTextString(sf::String str){
 	if (str != "")	mText.setString(str);
+    centerOrigin(mText);
 }
 
 void MessageBox::clean(){
