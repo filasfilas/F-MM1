@@ -19,15 +19,14 @@
 #include "maze16.h"
 #include "maze17.h"
 #include "maze18.h"
-/*#include "maze19.h"
+#include "maze19.h"
 #include "maze20.h"
 #include "maze21.h"
-*/
 #include "maze22.h"
 #include "maze23.h"
 #include "maze24.h"
-/*
 #include "maze25.h"
+/*
 #include "maze26.h"
 #include "maze27.h"
 #include "maze28.h"
