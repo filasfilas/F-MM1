@@ -108,7 +108,7 @@ bool GameModel::canMove (int dirX, int dirY){
 	if ((dirX==1)&&(dirY==0)) {dir = E;}
 	if ((dirX==-1)&&(dirY==0)) {dir = W;}
 
-	canMove(dir);
+	return canMove(dir);
 }
 
 bool GameModel::canMove(DIRECTION dir){
