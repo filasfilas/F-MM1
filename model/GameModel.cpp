@@ -112,6 +112,7 @@ bool GameModel::canMove (int dirX, int dirY){
 }
 
 bool GameModel::canMove(DIRECTION dir){
+    if(dir == NO_DIRECTION) return false;
 	std::string str;
 	str = _map.getPassage(_posX, _posY, dir);
 	if (str == "passage") {return true;}
